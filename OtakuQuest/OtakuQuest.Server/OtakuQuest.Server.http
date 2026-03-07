@@ -1,0 +1,6 @@
+@OtakuQuest.Server_HostAddress = http://localhost:5096
+
+GET {{OtakuQuest.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
