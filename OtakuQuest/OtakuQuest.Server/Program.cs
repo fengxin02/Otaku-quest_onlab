@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using OtakuQuest.Server.Data;
+
 namespace OtakuQuest.Server
 {
     public class Program
@@ -13,6 +16,8 @@ namespace OtakuQuest.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<OtakuQuestDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

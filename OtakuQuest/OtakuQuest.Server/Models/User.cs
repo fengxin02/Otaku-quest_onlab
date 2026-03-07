@@ -1,0 +1,28 @@
+﻿namespace OtakuQuest.Server.Models
+{
+    public class User
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = "User";
+        public string PasswordHash { get; set; } = string.Empty;
+
+        // RPG Statistics
+        public int Level { get; set; } = 1; 
+        public int XP { get; set; } = 0; 
+        public int Currency { get; set; } = 0; 
+        public int MaxHP { get; set; } = 100; 
+        public int CurrentHP { get; set; } = 100; 
+        public int STR { get; set; } = 1; 
+        public int INT { get; set; } = 1; 
+        public int DEF { get; set; } = 1; 
+
+        // Foreign keys for the items
+        public int? AvatarItemId { get; set; } 
+        public int? BackgroundItemId { get; set; }
+
+        // Navigációs tulajdonság: Egy felhasználónak több feladata lehet (N:1 kapcsolat)
+        //1 User - N Tasks
+        public ICollection<TodoTask> Tasks { get; set; } = new List<TodoTask>();
+
+    }
+}
