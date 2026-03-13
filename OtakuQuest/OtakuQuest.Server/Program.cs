@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OtakuQuest.Server.Data;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace OtakuQuest.Server
 {
@@ -17,8 +18,14 @@ namespace OtakuQuest.Server
 
 
             // Add services to the container.
+            //builder.Services.AddControllers();
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                // ignore the infinite loop when we have a circular reference between the entities (like User and Task)
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
@@ -67,6 +74,18 @@ namespace OtakuQuest.Server
                 ValidAudience = builder.Configuration["Jwt:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))};
                 });
+            // Enable CORS to allow requests from the React app
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policy =>
+                    {
+                        var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
+                        policy.WithOrigins(frontendUrl!)
+                              .AllowAnyHeader() //Allow to send JWT Token (Authorization header)
+                              .AllowAnyMethod(); // Allow the GET, POST, PUT, DELETE queries from React app
+                    });
+            });
             var app = builder.Build();
 
             app.UseDefaultFiles();
@@ -80,7 +99,9 @@ namespace OtakuQuest.Server
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowReactApp");
+            //authentication token for test1
+            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdDEiLCJleHAiOjE3NzM0OTc5ODAsImlzcyI6Ik90YWt1UXVlc3RTZXJ2ZXIiLCJhdWQiOiJPdGFrdVF1ZXN0Q2xpZW50In0.ANtufU78zqao815pgYlNN52qjglHeWlF-druYUDJzns
             app.UseAuthorization();
 
 

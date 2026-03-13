@@ -1,0 +1,188 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OtakuQuest.Server.Data;
+using OtakuQuest.Server.DTOs;
+using OtakuQuest.Server.Models;
+using System.Security.Claims;
+
+namespace OtakuQuest.Server.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class TodoController : ControllerBase
+    {
+        private readonly OtakuQuestDbContext _context;
+
+        public TodoController(OtakuQuestDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult CreateTask([FromBody] CreateTaskDto dto)
+        {
+            //read thet Id from token
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdString == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+            var userId = int.Parse(userIdString);
+
+
+            var newTask = new Models.TodoTask
+            {
+                UserId = userId,
+                Title = dto.Title,
+                Description = dto.Description,
+                Type = dto.Type,
+                DifficultyRank = dto.DifficultyRank,
+                Status = Models.TaskStatus.Pending,
+                CreatedAt = DateTime.UtcNow
+
+            };
+            _context.Tasks.Add(newTask);
+            _context.SaveChanges();
+            return Ok(new { Message = "Successfully added a new Challenge", Task = newTask });
+        }
+
+        [HttpGet]
+        public IActionResult GetTasks()
+        {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdString == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+            var userId = int.Parse(userIdString);
+
+            var tasks = _context.Tasks.Where(t => t.UserId == userId).ToList();
+            return Ok(tasks);
+        }
+
+        [HttpPost("{id}/complete")] //POST /api/todo/5/complete
+        public IActionResult CompleteTask(int id)
+        {
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdString == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+            var userId = int.Parse(userIdString);
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id && t.UserId == userId);
+            if (task == null)
+            {
+                return NotFound("Task not found");
+            }
+            var player = _context.Users.FirstOrDefault(u => u.Id == userId);
+            if (player == null)
+            {
+                return NotFound("Player not found");
+            }
+
+            if (task.Status == Models.TaskStatus.Completed)
+            {
+                return BadRequest("This Challenge is already completed");
+            }
+            task.Status = Models.TaskStatus.Completed;
+
+            // Reward the player based on the task's difficulty
+            int xp = 0;
+            int currency = 0;
+
+            switch (task.DifficultyRank)
+            {
+                case Models.DifficultyRank.E:
+                    xp = 10;
+                    currency = 5;
+                    break;
+                case Models.DifficultyRank.D:
+                    xp = 20;
+                    currency = 15;
+                    break;
+                case Models.DifficultyRank.C:
+                    xp = 30;
+                    currency = 30;
+                    break;
+                case Models.DifficultyRank.B:
+                    xp = 45;
+                    currency = 60;
+                    break;
+                case Models.DifficultyRank.A:
+                    xp = 50;
+                    currency = 200;
+                    break;
+                case Models.DifficultyRank.S:
+                    xp = 100;
+                    currency = 300;
+                    break;
+            }
+            int intteligence = 0;
+            int strength = 0;
+            int defence = 0;
+            //str, int, def
+            switch (task.Type)
+            {
+                case TaskType.Health: 
+                    defence = 10; 
+                    break;
+                case TaskType.Workout: 
+                    strength = 5; 
+                    break;
+                case TaskType.Hobby: 
+                     defence = 5; 
+                    break;
+                case TaskType.Social:
+                    intteligence = 8;
+                    break;
+                case TaskType.Study:
+                    intteligence = 15;
+                    break;
+            }
+
+            player.XP += xp;
+            player.Currency += currency;
+            player.STR += strength;
+            player.INT += intteligence;
+            player.DEF += defence;
+
+            //levelup
+
+            int xpForNextLevel = player.Level * 100; // Example: 100 XP per level
+
+            bool leveledUp = false;
+
+            if(player.XP > xpForNextLevel)
+            {
+                player.Level++;
+                player.XP -= xpForNextLevel;
+                player.MaxHP += 20;
+                player.CurrentHP = player.MaxHP;
+                player.Currency += 100; // Bonus currency for leveling up
+                player.STR += 2; // Bonus strength for leveling up
+                player.INT += 2; // Bonus intelligence for leveling up
+                player.DEF += 2; // Bonus defense for leveling up
+
+                leveledUp = true;
+            }
+
+            _context.SaveChanges();
+            return Ok(new
+            {
+                Message = leveledUp ? "Challenge completed! Level UP!" : "Challenge completed successfully!",
+                XPReward = xp,
+                CurrencyReward = currency,
+                StrengthReward = strength,
+                IntelligenceReward = intteligence,
+                DefenceReward = defence,
+                NewLevel = player.Level,
+                CurrentXP = player.XP,
+                XpToNextLevel = xpForNextLevel - player.XP
+
+            });
+        }
+    }
+}
