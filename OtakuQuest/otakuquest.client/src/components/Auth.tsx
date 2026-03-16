@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../api/axios'; 
 import './Auth.css'; 
 
@@ -7,7 +7,17 @@ const Auth = () => {
     const [password, setPassword] = useState<string>('');
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [message, setMessage] = useState<string>('');
+    const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
 
+
+    useEffect(() => {
+        // Listen for window resize events to update mobile state
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+     }, []);
+    
     //run if u click the submit button
     const handleSubmit = async (e: React.FormEvent) => {
         // Stop refreshing the page
@@ -33,8 +43,9 @@ const Auth = () => {
 
 return (
         <div className="auth-wrapper">
+          <h1 className="auth-main-title">Otaku Quest</h1>
             <div className="auth-container">
-                <h2 className="auth-title">{isLogin ? 'Login to Otaku Quest' : 'Create a New Character'}</h2>
+                <h2 className="auth-title">{isLogin ? ( isMobile ? 'Otaku Quest' : 'Login' ) : 'New Character'}</h2>
                 
                 <form onSubmit={handleSubmit} className="auth-form">
                     <input

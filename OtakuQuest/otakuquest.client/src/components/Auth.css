@@ -2,17 +2,19 @@
     --primary-color: #10B981;
     --primary-hover: #059669;
     --bg-gradient: linear-gradient(135deg, #3c434e 0%, #373e4b 100%);
-    --card-bg: #ffffff;
+    --card-bg: rgba(242, 243, 247, 0.7);
     --text-main: #2d3748;
     --text-muted: #718096;
+    --test-main-title : #cfc8c8;
 }
 
 .auth-wrapper {
     display: flex;
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
-    width: 100vw;
+    width: 100%;
     padding: 20px;
     box-sizing: border-box;
     background-image: 
@@ -24,15 +26,30 @@
     background-repeat: no-repeat;
 }
 
+.auth-main-title {
+    color: var(--test-main-title);
+    font-size: 4.5rem; 
+    font-weight: 900; 
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Maked spaces between letters */
+    margin-top: -105px; 
+    margin-bottom: 65px;
+    text-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6), 0px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    
+}
+
 .auth-container {
     width: 100%;
     max-width: 550px; 
     padding: 60px 50px; 
-    background-color: var(--card-bg);
     border-radius: 24px; 
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); 
     text-align: center;
+    background: linear-gradient(var(--card-bg));
+    box-sizing: border-box;
 }
+
 
 .auth-title {
     margin-bottom: 40px;
@@ -56,7 +73,7 @@
     background-color: #f8fafc;
     border: 2px solid #e2e8f0;
     border-radius: 16px;
-    outline: none;
+    outline: none; /* Removes browser default focus outline */
     transition: all 0.3s ease;
 }
 
@@ -82,6 +99,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    box-sizing: border-box;
 }
 
 .auth-button:hover {
@@ -120,20 +138,39 @@
    ========================================= */
 @media (max-width: 768px) {
     .auth-wrapper {
-        background: var(--card-bg); 
         padding: 0;
         align-items: flex-start;
+         background-image: 
+        /* Makes a dark filter */
+        linear-gradient(rgba(35, 43, 61, 0.7), rgba(69, 75, 90, 0.7)),
+        url('../assets/login-bg-mobile.png'); 
+        background-size: cover;
+        background-position: center; 
+
+        
     }
 
+   
+
+    .auth-main-title {
+        display: none;
+    }
     .auth-container {
-        padding: 50px 25px;
+        padding: 20px 30px 30px 30px;
         box-shadow: none; 
         border-radius: 0;
+        background: linear-gradient(var(--card-bg)); 
+        width: 100%;
+        height: 100vh;
+        max-width: 100%;
+        max-height: 100vh;
+        box-sizing: border-box;
     }
 
     .auth-title {
-        font-size: 2rem;
-        margin-bottom: 30px;
+        margin-top: 80px;
+        font-size: 3.5rem;
+        margin-bottom: 50px;
     }
 
     .auth-input {
@@ -141,6 +178,9 @@
         font-size: 1.1rem;
     }
 
+    .auth-form {
+        gap: 45px;
+    }
     .auth-button {
         padding: 18px;
         font-size: 1.3rem;
