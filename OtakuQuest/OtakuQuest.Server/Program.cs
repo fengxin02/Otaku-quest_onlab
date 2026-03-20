@@ -101,7 +101,6 @@ namespace OtakuQuest.Server
             app.UseHttpsRedirection();
             app.UseCors("AllowReactApp");
             //authentication token for test1
-            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdDEiLCJleHAiOjE3NzM0OTc5ODAsImlzcyI6Ik90YWt1UXVlc3RTZXJ2ZXIiLCJhdWQiOiJPdGFrdVF1ZXN0Q2xpZW50In0.ANtufU78zqao815pgYlNN52qjglHeWlF-druYUDJzns
             app.UseAuthorization();
 
 
