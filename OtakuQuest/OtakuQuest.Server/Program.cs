@@ -88,8 +88,7 @@ namespace OtakuQuest.Server
             });
             var app = builder.Build();
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -98,8 +97,11 @@ namespace OtakuQuest.Server
                 app.UseSwaggerUI();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseCors("AllowReactApp");
+            app.UseAuthentication();
             //authentication token for test1
             app.UseAuthorization();
 
