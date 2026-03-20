@@ -41,7 +41,7 @@ namespace OtakuQuest.Server.Controllers
             _context.Users.Add(newUser);
             _context.SaveChanges();
 
-            return Ok("Registration was succeed, welcome to OtakuQuest ");
+            return Ok(new { Message = "Registration was succeed, welcome to OtakuQuest " });
         }
 
         [HttpPost("login")]

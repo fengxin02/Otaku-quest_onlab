@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../api/axios'; 
+import { AuthService } from '../api/generated';
 import './Auth.css'; 
 
 const Auth = () => {
@@ -23,21 +23,28 @@ const Auth = () => {
         // Stop refreshing the page
         e.preventDefault();
         try {
-            const endpoint = isLogin ? '/Auth/login' : '/Auth/register';
-            const response = await api.post(endpoint, { username, password });
-            if(isLogin) {
-                const token = response.data.token;
-                localStorage.setItem('token', token);
-                setMessage(response.data.message);
-                // Később itt fogjuk átirányítani a játékost a főoldalra
-            }
-            else {
-                setMessage('Successfully registered! You can now log in.');
+            if (isLogin) {
+                const response = await AuthService.postApiAuthLogin({
+                     username, password
+                    });
+                
+                const token = response.token;
+                if (token) {
+                    localStorage.setItem('token', token);
+                }
+                setMessage(response.message || 'Successfully logged in!');
+                // Redirect to the main page after successful login
+            } else {
+                const response = await AuthService.postApiAuthRegister({
+                     username, password
+                    });
+                
+                setMessage(response.message);
                 setIsLogin(true);
                 setPassword('');
             }
         } catch (error: any) {
-            setMessage(error.response?.data?.message || 'An error occurred');
+            setMessage(error.body?.message || 'Something went wrong at communication. Please try again.');
         }
 };
 
@@ -64,7 +71,7 @@ return (
                         required
                         className="auth-input"
                     />
-                    <button type="submit" className="auth-button">
+                    <button type="submit" className="auth-button" onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(e); }}>
                         {isLogin ? 'Back to Adventure' : 'Create Character'}
                     </button>
                 </form>
@@ -72,7 +79,7 @@ return (
                 {message && <p className="auth-message">{message}</p>}
 
                 <button 
-                    onClick={() => { setIsLogin(!isLogin); setMessage(''); }} 
+                    onClick={() => { setIsLogin(!isLogin); setMessage('');  setPassword(''); setUsername(''); }} 
                     className="auth-toggle"
                 >
                     {isLogin ? 'Don\'t have a character yet? Click here!' : 'Already have a character? Log in!'}
