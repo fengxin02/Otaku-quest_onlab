@@ -43,16 +43,11 @@
 .portrait-placeholder {
     width: 100%;
     height: 480px;
-    background: white;
-    border: 3px dashed #475569;
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #64748b;
-    font-weight: bold;
-    font-size: 1.2rem;
-    box-shadow: inset 0 0 30px rgba(250, 247, 247, 0.6);
 }
 .portrait-img {
     max-width: 100%;

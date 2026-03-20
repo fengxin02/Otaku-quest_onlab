@@ -2,16 +2,25 @@ import {  useEffect, useState} from "react";
 
 import { PlayerProfileService } from '../api/generated';
 import './Dashboard.css';
+import SakuraImage from '../assets/Sakura.png';
+import DefaultImage from '../assets/Default.png';
+import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
 
 interface DashboardProps {
     onLogout: () => void;
 }
 
+ const characterImages: Record<string, string> = {
+    'Sakura': SakuraImage,
+    // 'Kenji': KenjiImage,
+    'Default': DefaultImage,
+    'Saki': TogawaSakikoImage,
+};
 const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
     const [stats, setStats] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
-
+   
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -44,7 +53,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
     const xpNeededForNextLevel = (stats.level) * 100; 
     const currentXp = stats.xp;
     const xpPercentage = Math.min((currentXp / xpNeededForNextLevel) * 100, 100);
-
+    //const currentAvatar = stats.avatarItemId || 'Sakura';
+    //const portraitSource = characterImages[currentAvatar] || characterImages['Sakura'];
+    const portraitSource = characterImages['Saki'];
     return (
         <div className="dashboard-wrapper">
             <div className="dashboard-card">
@@ -52,7 +63,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                 {/* === Left site Character Portrait === */}
                 <div className="character-portrait-section">
                     <div className="portrait-placeholder">
-                        <img className="portrait-img" src="../src/assets/Sakura.png" alt="Character Portrait" />
+                        <img className="portrait-img" src={portraitSource} alt="Character Portrait" />
                     </div>
                 </div>
 

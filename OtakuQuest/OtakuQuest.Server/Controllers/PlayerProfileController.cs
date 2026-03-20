@@ -48,7 +48,8 @@ namespace OtakuQuest.Server.Controllers
                 player.INT,
                 player.DEF,
                 player.CurrentHP,
-                player.MaxHP
+                player.MaxHP,
+                player.AvatarItemId,
             });
         }
     }
