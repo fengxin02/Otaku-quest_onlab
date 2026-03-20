@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthService } from '../api/generated';
 import './Auth.css'; 
 
-const Auth = () => {
+const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -33,7 +33,8 @@ const Auth = () => {
                     localStorage.setItem('token', token);
                 }
                 setMessage(response.message || 'Successfully logged in!');
-                // Redirect to the main page after successful login
+                onLoginSuccess();
+
             } else {
                 const response = await AuthService.postApiAuthRegister({
                      username, password

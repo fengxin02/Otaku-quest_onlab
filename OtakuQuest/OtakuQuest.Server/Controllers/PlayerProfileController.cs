@@ -46,7 +46,9 @@ namespace OtakuQuest.Server.Controllers
                 player.Currency,
                 player.STR,
                 player.INT,
-                player.DEF
+                player.DEF,
+                player.CurrentHP,
+                player.MaxHP
             });
         }
     }

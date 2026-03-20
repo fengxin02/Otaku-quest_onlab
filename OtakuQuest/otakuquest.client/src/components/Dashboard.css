@@ -1,0 +1,283 @@
+:root{
+    --stat-bg-color: rgba(168, 50, 73, 0.4);
+    --stat-text-color: #ffffff;
+
+
+}
+
+.dashboard-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    /* Egyelőre egy sötétkék háttér, ide jön majd a te képed! */
+    background-color: #e5e5e5; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 1000px; 
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(224, 89, 89, 0.5);
+    color: #e2e8f0;
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+/* ================= Left site picture ================= */
+.character-portrait-section {
+    flex: 0 0 320px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.portrait-placeholder {
+    width: 100%;
+    height: 480px;
+    background: white;
+    border: 3px dashed #475569;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #64748b;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: inset 0 0 30px rgba(250, 247, 247, 0.6);
+}
+.portrait-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* ================= Right side (STATS) ================= */
+.character-stats-section {
+    flex: 1; /* Fill the remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #334155;
+    padding-bottom: 15px;
+}
+
+.title-group h2 {
+    margin: 0 0 5px 0;
+    color: #fe0000;
+    font-size: 2.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.level-subtitle {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logout-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+.logout-btn:hover { 
+    background-color: #dc2626;
+    transform: translateY(-2px); }
+
+/* XP bar */
+.xp-container {
+    width: 90%;
+    background: var(--stat-bg-color);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.xp-text {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--stat-text-color);
+    font-size: 1.1rem;
+}
+
+.xp-bar-bg {
+    width: 100%;
+    height: 18px;
+    background-color: var(--stat-bg-color);
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.xp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stats */
+.stats-and-equip-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.stat-column {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.stat-box {
+    background: var(--stat-bg-color);
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.stat-box p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 12px 0;
+    color: var(--stat-text-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat-box span {
+    color: #0e242d;
+    font-weight: 800;
+}
+
+.vital-box span { color: #f87171; } 
+.vital-box p:last-child span { 
+    color: #fbbf24; } 
+
+/* Weapon Slot */
+.dashboard-card-weapons {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    width: 15%;
+    min-height: 480px;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 15px 40px rgba(224, 89, 89, 0.5);
+    color: #e2e8f0;
+    box-sizing: border-box;
+    margin-left: 9%; 
+    display: flex;
+}
+
+.equip-column {
+    flex: 1;
+    display: flex;
+}
+
+.equip-slot-box {
+    background: var(--stat-bg-color);
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.equip-slot-box h4 {
+    margin: 0 0 15px 0;
+    color: var(--stat-text-color);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.weapon-placeholder {
+    flex: 1;
+    background: var(--stat-bg-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.weapon-placeholder:hover {
+    border-color: #64748b;
+    background: rgba(30, 41, 59, 0.8);
+    cursor: pointer;
+}
+
+.empty-slot-icon { font-size: 3rem; opacity: 0.3; margin-bottom: 10px; }
+.weapon-placeholder p { color: var(--stat-text-color); margin: 0 0 5px 0; font-weight: bold; }
+.weapon-placeholder small { color: var(--stat-text-color); }
+
+/* Loading Screen */
+.dashboard-loading, .dashboard-error {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--stat-text-color);
+    font-size: 1.5rem;
+    background-color: var(--stat-bg-color);
+}
+
+/* ================= MOBIL NÉZET ================= */
+@media (max-width: 850px) {
+    .dashboard-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard-card-weapons {
+        width: 100%;          
+        max-width: 1000px;    
+        margin-left: 0;        
+        margin-top: 20px;     
+        min-height: auto;     
+    }
+    .dashboard-card {
+        flex-direction: column; 
+        padding: 25px 20px;
+        gap: 25px;
+    }
+
+    .character-portrait-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .portrait-placeholder {
+        height: 350px;
+    }
+
+    .stats-and-equip-grid {
+        flex-direction: column;
+    }
+}
