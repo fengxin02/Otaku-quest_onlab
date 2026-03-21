@@ -20,11 +20,15 @@ function App() {
         localStorage.removeItem('token'); 
         setIsAuthenticated(false); 
     };
+    const handleBackToMenu = () => {
+        // Implement any additional logic needed when going back to the menu
+        console.log('Back to menu clicked');
+    }
 
     return (
         <div>
             {isAuthenticated ? (
-                <Dashboard onLogout={handleLogout} />
+                <Dashboard onLogout={handleLogout} onBackToMenu={handleBackToMenu} />
             ) : (
                 <Auth onLoginSuccess={handleLoginSuccess} />
             )}

@@ -8,15 +8,48 @@
 .dashboard-wrapper {
     min-height: 100vh;
     width: 100%;
-    /* Egyelőre egy sötétkék háttér, ide jön majd a te képed! */
-    background-color: #e5e5e5; 
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
 }
+.dashboard-layout-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 20px; /* Distance between the button and the cards */
+    width: 100%;
+    max-width: 1400px; /* So that the cards are aligned at the edges */
+}
 
+.dashboard-cards-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 60px; /* Distance between the cards */
+    width: 100%;
+    align-items: stretch;
+}
+
+.back-to-menu-btn {
+    background: rgba(30, 41, 59, 0.85);
+    color: white;
+    border: 2px solid #334155;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.back-to-menu-btn:hover {
+    background: rgba(51, 65, 85, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
 .dashboard-card {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
@@ -158,31 +191,50 @@
     margin: 12px 0;
     color: var(--stat-text-color);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
+
+.stat-icon{
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    object-fit: contain;
+}
 .stat-box span {
     color: #0e242d;
     font-weight: 800;
 }
 
-.vital-box span { color: #f87171; } 
-.vital-box p:last-child span { 
-    color: #fbbf24; } 
 
+.vital-box span {
+    color: #f87171; 
+    margin-left: auto;
+} 
+
+.vital-box p:last-child span { 
+    color: #fbbf24; 
+} 
+
+.attributes-box span {
+    color: #000000; 
+    margin-left: auto;
+}
 /* Weapon Slot */
 .dashboard-card-weapons {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
-    width: 15%;
-    min-height: 480px;
+    
+    width: 320px; 
+    flex-shrink: 0; 
+    
     border-radius: 20px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 15px 40px rgba(224, 89, 89, 0.5);
     color: #e2e8f0;
     box-sizing: border-box;
-    margin-left: 9%; 
     display: flex;
+    flex-direction: column;
 }
 
 .equip-column {
@@ -246,6 +298,10 @@
 /* ================= MOBIL NÉZET ================= */
 @media (max-width: 850px) {
     .dashboard-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .dashboard-cards-row {
         flex-direction: column;
         align-items: center;
     }

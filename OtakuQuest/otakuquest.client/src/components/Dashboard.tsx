@@ -5,9 +5,17 @@ import './Dashboard.css';
 import SakuraImage from '../assets/Sakura.png';
 import DefaultImage from '../assets/Default.png';
 import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
+import Heart from '../assets/heart.png';
+import Primogem from '../assets/primogem.png';
+import Strengthicon from '../assets/strength.png';
+import Defenseicon from '../assets/DoranShield.png';
+import Intelligenceicon from '../assets/eldenring.png';
+import DefaultBackground from '../assets/DefaultBackground.png';
+
 
 interface DashboardProps {
     onLogout: () => void;
+    onBackToMenu: () => void;
 }
 
  const characterImages: Record<string, string> = {
@@ -16,7 +24,12 @@ interface DashboardProps {
     'Default': DefaultImage,
     'Saki': TogawaSakikoImage,
 };
-const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
+const backgroundImages: Record<string, string> = {
+    'Default': DefaultBackground,
+    // Add more background images as needed
+};
+
+const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
     const [stats, setStats] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
@@ -55,56 +68,73 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
     const xpPercentage = Math.min((currentXp / xpNeededForNextLevel) * 100, 100);
     //const currentAvatar = stats.avatarItemId || 'Sakura';
     //const portraitSource = characterImages[currentAvatar] || characterImages['Sakura'];
+    //const currentBackground = stats?.backgroundName || 'Default';
+    //const bgSource = backgroundImages[currentBackground] || backgroundImages['Default'];
+    const bgSource = backgroundImages['Default'];
     const portraitSource = characterImages['Saki'];
     return (
-        <div className="dashboard-wrapper">
-            <div className="dashboard-card">
+        <div className="dashboard-wrapper" style={{ 
+                backgroundImage: `url(${bgSource})`, 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat' 
+            }}>
 
-                {/* === Left site Character Portrait === */}
-                <div className="character-portrait-section">
-                    <div className="portrait-placeholder">
-                        <img className="portrait-img" src={portraitSource} alt="Character Portrait" />
-                    </div>
-                </div>
-
-                {/* === Right side: STATS AND EQUIPMENT === */}
-                <div className="character-stats-section">
+            <div className="dashboard-layout-column">
+                
+                {/* BACK GOMB FELÜL, KÍVÜL A KÁRTYÁKON */}
+                <button onClick={onBackToMenu} className="back-to-menu-btn">Back</button>
+                
+                {/* EZ A DOBOZ TARTJA EGYMÁS MELLETT A KÉT KÁRTYÁT */}
+                <div className="dashboard-cards-row">
                     
-                    <header className="dashboard-header">
-                        <div className="title-group">
-                            <h2>{stats.username}</h2>
-                            <span className="level-subtitle">Level: {stats.level} </span>
-                        </div>
-                        <button onClick={onLogout} className="logout-btn">Logout</button>
-                    </header>
+                    {/* ===== 1. KÁRTYA: FŐ KÁRTYA (Portré + Statok) ===== */}
+                    <div className="dashboard-card">
 
-                    <div className="xp-container">
-                        <div className="xp-text">Experience: {currentXp} / {xpNeededForNextLevel} XP</div>
-                        <div className="xp-bar-bg">
-                            <div className="xp-bar-fill" style={{ width: `${xpPercentage}%` }}></div>
-                        </div>
-                    </div>
-
-                    {/* === Right side: STATS === */}
-                    <div className="stats-and-equip-grid">
-                        
-                        <div className="stat-column">
-                            <div className="stat-box vital-box">
-                                <p>❤️ Health: <span> {stats.currentHP} / {stats.maxHP}</span></p>
-                                <p>💰 Gold: <span>{stats.currency}</span></p>
-                            </div>
-                            
-                            <div className="stat-box attributes-box">
-                                <p>⚔️ Strength (STR): <span>{stats.str}</span></p>
-                                <p>🧠 Intelligence (INT): <span>{stats.int}</span></p>
-                                <p>🛡️ Defense (DEF): <span>{stats.def}</span></p>
+                        {/* Left site Character Portrait */}
+                        <div className="character-portrait-section">
+                            <div className="portrait-placeholder">
+                                <img className="portrait-img" src={portraitSource} alt="Character Portrait" />
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            {/* === Right side: WEAPON === */}
-            <div className="dashboard-card-weapons">
+
+                        {/* Right side: STATS */}
+                        <div className="character-stats-section">
+                            <header className="dashboard-header">
+                                <div className="title-group">
+                                    <h2>{stats.username}</h2>
+                                    <span className="level-subtitle">Level: {stats.level} </span>
+                                </div>
+                                <button onClick={onLogout} className="logout-btn">Logout</button>
+                            </header>
+
+                            <div className="xp-container">
+                                <div className="xp-text">Experience: {currentXp} / {xpNeededForNextLevel} XP</div>
+                                <div className="xp-bar-bg">
+                                    <div className="xp-bar-fill" style={{ width: `${xpPercentage}%` }}></div>
+                                </div>
+                            </div>
+
+                            <div className="stats-and-equip-grid">
+                                <div className="stat-column">
+                                    <div className="stat-box vital-box">
+                                        <p ><img className="stat-icon" src={Heart} alt="Health" /> Health: <span> {stats.currentHP} / {stats.maxHP}</span></p>
+                                        <p><img className="stat-icon" src={Primogem} alt="Primogem" /> Gems: <span>{stats.currency}</span></p>
+                                    </div>
+                                    
+                                    <div className="stat-box attributes-box">
+                                        <p><img className="stat-icon" src={Strengthicon} alt="Strength" /> Strength (STR): <span>{stats.str}</span></p>
+                                        <p><img className="stat-icon" src={Intelligenceicon} alt="Intelligence" /> Intelligence (INT): <span>{stats.int}</span></p>
+                                        <p><img className="stat-icon" src={Defenseicon} alt="Defense" /> Defense (DEF): <span>{stats.def}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> {/* <--- FŐ KÁRTYA VÉGE */}
+
+                    {/* ===== 2. KÁRTYA: FEGYVER ===== */}
+                    <div className="dashboard-card-weapons">
                         <div className="equip-column">
                             <div className="equip-slot-box">
                                 <h4>Weapon in Hand</h4>
@@ -115,6 +145,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
                                 </div>
                             </div>
                         </div>
+                    </div> {/* <--- FEGYVER KÁRTYA VÉGE */}
+
+                </div> {/* <--- KÁRTYÁK SORÁNAK VÉGE */}
+
             </div>
         </div>
     );
