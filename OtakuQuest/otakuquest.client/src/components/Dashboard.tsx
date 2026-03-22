@@ -16,6 +16,8 @@ import DefaultBackground from '../assets/DefaultBackground.png';
 interface DashboardProps {
     onLogout: () => void;
     onBackToMenu: () => void;
+    stats: any;
+    loading: boolean;
 }
 
  const characterImages: Record<string, string> = {
@@ -29,36 +31,11 @@ const backgroundImages: Record<string, string> = {
     // Add more background images as needed
 };
 
-const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
-    const [stats, setStats] = useState<any>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string>('');
+const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats, loading }) => {
+
    
-
-    useEffect(() => {
-        const fetchStats = async () => {
-            try {
-                const response = await PlayerProfileService.getApiPlayerProfileMyStats();
-                setStats(response);
-            } catch (err: any) {
-                console.error('Error fetching player stats:', err);
-                setError(err.body?.message || 'Failed to load player stats. Please try again.');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchStats();
-    }, []);
-
-
     if(loading) {
         return <div className="dashboard-loading">Challenges are loading...</div>;
-    }
-    if(error) {
-        return <div className="dashboard-error">
-            <p>{error}</p>
-            <button onClick={onLogout} className="logout-btn">Back to the login page</button>
-        </div>
     }
     if(!stats) {
         return null;
@@ -136,7 +113,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
                     <div className="dashboard-card-weapons">
                         <div className="equip-column">
                             <div className="equip-slot-box">
-                                <h4>Weapon in Hand</h4>
+                                <h4>Weapon</h4>
                                 <div className="weapon-placeholder">
                                     <span className="empty-slot-icon">🗡️</span>
                                     <p>No Weapon</p>
