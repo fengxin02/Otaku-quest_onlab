@@ -1,17 +1,16 @@
 :root{
     --stat-bg-color: rgba(168, 50, 73, 0.4);
     --stat-text-color: #ffffff;
-
-
 }
 
 .dashboard-wrapper {
     min-height: 100vh;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    flex-direction: column;
+    justify-content: center; /* Main y-axis*/
+    align-items: center; /*Vertical x-axis*/
+    padding: 20px; 
     box-sizing: border-box;
 }
 .dashboard-layout-column {
@@ -68,7 +67,7 @@
 
 /* ================= Left site picture ================= */
 .character-portrait-section {
-    flex: 0 0 320px; 
+    flex: 0 0 320px;  /*force 320pixel width it will never change*/
     display: flex;
     flex-direction: column;
 }
@@ -86,7 +85,7 @@
     max-width: 100%;
     max-height: 100%;
     border-radius: 12px;
-    object-fit: cover;
+    object-fit: cover; /*fill the container*/
 }
 
 /* ================= Right side (STATS) ================= */
@@ -95,6 +94,17 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+}
+
+.character-name-badge {
+    margin-top: 15px;
+    background: transparent;
+    color: #000000;
+    text-align: center; 
+    padding: 12px 20px; 
+    font-size: 1.5rem; 
+    font-weight: 900; 
+    letter-spacing: 2px; 
 }
 
 .dashboard-header {
@@ -212,8 +222,19 @@
     margin-left: auto;
 } 
 
+
 .vital-box p:last-child span { 
-    color: #fbbf24; 
+    background: linear-gradient(90deg, #ff007f 0%, #7928ca 50%, #b0782b 100%);
+    
+    /* 第 2 步：让背景只按照文字的轮廓显示 */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 第 3 步：把文字本体变成透明的，露出后面的底色 */
+    color: transparent;
+    
+    /* 补充：字体稍微加粗一点，渐变效果会更明显！ */
+    font-weight: 900;
 } 
 
 .attributes-box span {

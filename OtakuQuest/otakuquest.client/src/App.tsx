@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
+import MainMenu from './components/MainMenu';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isMainMenuOpen, setIsMainMenuOpen] = useState<boolean>(false);
+    
     useEffect( ()=>{
 
         const token = localStorage.getItem('token');
@@ -23,11 +26,13 @@ function App() {
     const handleBackToMenu = () => {
         // Implement any additional logic needed when going back to the menu
         console.log('Back to menu clicked');
+        setIsMainMenuOpen(true);
+
     }
 
     return (
         <div>
-            {isAuthenticated ? (
+            {isAuthenticated ? ( isMainMenuOpen ? <MainMenu /> :
                 <Dashboard onLogout={handleLogout} onBackToMenu={handleBackToMenu} />
             ) : (
                 <Auth onLoginSuccess={handleLoginSuccess} />

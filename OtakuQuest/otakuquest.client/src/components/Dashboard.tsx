@@ -82,19 +82,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
 
             <div className="dashboard-layout-column">
                 
-                {/* BACK GOMB FELÜL, KÍVÜL A KÁRTYÁKON */}
                 <button onClick={onBackToMenu} className="back-to-menu-btn">Back</button>
                 
-                {/* EZ A DOBOZ TARTJA EGYMÁS MELLETT A KÉT KÁRTYÁT */}
                 <div className="dashboard-cards-row">
                     
-                    {/* ===== 1. KÁRTYA: FŐ KÁRTYA (Portré + Statok) ===== */}
                     <div className="dashboard-card">
 
                         {/* Left site Character Portrait */}
                         <div className="character-portrait-section">
                             <div className="portrait-placeholder">
                                 <img className="portrait-img" src={portraitSource} alt="Character Portrait" />
+                            </div>
+                            <div className="character-name-badge">
+                                {stats.username} 
                             </div>
                         </div>
 
@@ -131,9 +131,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
                             </div>
                         </div>
 
-                    </div> {/* <--- FŐ KÁRTYA VÉGE */}
+                    </div> 
 
-                    {/* ===== 2. KÁRTYA: FEGYVER ===== */}
                     <div className="dashboard-card-weapons">
                         <div className="equip-column">
                             <div className="equip-slot-box">
@@ -145,9 +144,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu }) => {
                                 </div>
                             </div>
                         </div>
-                    </div> {/* <--- FEGYVER KÁRTYA VÉGE */}
+                    </div> 
 
-                </div> {/* <--- KÁRTYÁK SORÁNAK VÉGE */}
+                </div> 
 
             </div>
         </div>
