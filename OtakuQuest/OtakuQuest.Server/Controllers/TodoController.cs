@@ -40,7 +40,7 @@ namespace OtakuQuest.Server.Controllers
                 Description = dto.Description,
                 Type = dto.Type,
                 DifficultyRank = dto.DifficultyRank,
-                Status = Models.TaskStatus.Pending,
+                Status = Models.TaskStatus.InProgress,
                 CreatedAt = DateTime.UtcNow
 
             };

@@ -60,6 +60,7 @@ function App() {
                           onNavigate={(screenName) => setCurrentScreen(screenName)} 
                           stats= {playerStats}
                           loading={isStatsLoading}
+                          refreshStats={fetchStats}
                        />;
             
             case 'character':

@@ -17,7 +17,6 @@ interface DashboardProps {
     onLogout: () => void;
     onBackToMenu: () => void;
     stats: any;
-    loading: boolean;
 }
 
  const characterImages: Record<string, string> = {
@@ -31,12 +30,8 @@ const backgroundImages: Record<string, string> = {
     // Add more background images as needed
 };
 
-const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats, loading }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) => {
 
-   
-    if(loading) {
-        return <div className="dashboard-loading">Challenges are loading...</div>;
-    }
     if(!stats) {
         return null;
     }

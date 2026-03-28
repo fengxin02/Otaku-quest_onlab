@@ -1,0 +1,202 @@
+
+.quest-board-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.quest-loading {
+    text-align: center;
+    color: #64748b;
+    font-weight: bold;
+    font-style: italic;
+    padding: 20px;
+}
+
+.no-quests-msg {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    padding: 20px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+}
+
+.quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto; /* If there are many quests, it will be scrollable */
+    padding-right: 5px;
+}
+
+.quest-card {
+    background: #f8fafc;
+    border-left: 6px solid #3b82f6; 
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.quest-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.quest-title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.complete-quest-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.complete-quest-btn:hover {
+    background: #059669;
+    transform: scale(1.05);
+}
+
+
+.add-quest-input:focus { border-color: #3b82f6; }
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.save-quest-btn {
+    flex: 1;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.save-quest-btn:hover { background: #2563eb; }
+
+.cancel-quest-btn {
+    flex: 1;
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.cancel-quest-btn:hover { background: #dc2626; }
+
+.add-todo-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 16px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-todo-btn:hover {
+    background: #2563eb;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.input-label,
+.add-quest-input,
+.add-quest-select,
+.add-todo-btn {
+    font-family: System-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    color: #0f172a; 
+}
+
+.add-quest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+}
+
+.add-quest-input {
+    padding: 12px 15px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    outline: none;
+    font-weight: bold;
+
+}
+.add-quest-input.textarea {
+    min-height: 80px;
+    font-size: 2rem;
+    padding: 12px 15px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-weight: bold;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.input-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+.add-quest-select {
+    /* Get rid of the default browser styles */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #0f172a;
+    transition: all 0.2s;
+    
+    /* Inline SVG for custom down arrow */
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1.2rem;
+    
+    padding-right: 40px; 
+}

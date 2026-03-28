@@ -5,10 +5,13 @@ import SakuraImage from '../assets/Sakura.png';
 import DefaultImage from '../assets/Default.png';
 import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
 import DefaultBackground from '../assets/DefaultBackground.png';
+import QuestBoard from './QuestBoard';
+import { useState } from 'react';
 interface MainMenuProps {
     onNavigate: (screen: string) => void;
     stats: any;
     loading: boolean;
+    refreshStats: () => void;
 
 }
 
@@ -22,8 +25,10 @@ const backgroundImages: Record<string, string> = {
     'Default': DefaultBackground,
 };
 
-const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading }) => {
 
+
+const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading, refreshStats }) => {
+    const [showCompletedQuests, setShowCompletedQuests] = useState(false);
 
 
     if (loading) return <div className="mainmenu-loading">Challenges Loading...</div>;
@@ -68,14 +73,13 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading }) => {
             {/* --- Bottom: The Big TODO List Card --- */}
             <div className="mainmenu-todo-section">
                 <div className="todo-header">
-                    <h3>📜 Quest Board (Todo List)</h3>
+                    <h3>{showCompletedQuests ? 'Completed' : 'Active'} Quests</h3>
+                    <button className="completed-quest-btn" onClick={() => setShowCompletedQuests(!showCompletedQuests)}>
+                        {showCompletedQuests ? 'Hide Completed Quests' : 'Show Completed Quests'}
+                    </button>
                 </div>
-                
-                <div className="todo-list-placeholder">
-                    <p>No active quests available.</p>
-                </div>
+                <QuestBoard refreshStats={refreshStats} showCompletedTasks={showCompletedQuests}/>
 
-                <button className="add-todo-btn">+ Add New Quest</button>
             </div>
 
         </div>
