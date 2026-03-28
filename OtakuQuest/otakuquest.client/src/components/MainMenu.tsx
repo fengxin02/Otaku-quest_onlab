@@ -27,7 +27,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading }) => {
 
 
     if (loading) return <div className="mainmenu-loading">Challenges Loading...</div>;
-    if (!stats) return null;
+    if (!stats) return <div>No player stats available.</div>;
 
 
     const xpNeededForNextLevel = stats.level * 100;
@@ -62,7 +62,6 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading }) => {
                     </div>
                 </div>
                 
-                {/* A Karakter képe kör alakban kivágva */}
                 <img className="character-avatar" src={portraitSource} alt="Character" onClick={()=> onNavigate('character')}/>
             </div>
 

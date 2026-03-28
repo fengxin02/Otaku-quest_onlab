@@ -27,7 +27,14 @@ function App() {
         const token = localStorage.getItem('token');
         if(token) {
             fetchStats();
-            setCurrentScreen('mainmenu');
+            if(!fetchStats){
+                localStorage.removeItem('token');
+                setPlayerStats(null);
+                setCurrentScreen('login');
+            }
+            else{
+                setCurrentScreen('mainmenu');
+            }
         }
     }, []);
 
@@ -60,7 +67,6 @@ function App() {
                           onBackToMenu={() => setCurrentScreen('mainmenu')} 
                           onLogout={handleLogout} 
                           stats={playerStats}
-                          loading={isStatsLoading}
                        />;
             
             default:

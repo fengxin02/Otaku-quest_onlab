@@ -1,20 +1,28 @@
-/* A teljes képernyő */
 .mainmenu-wrapper {
     min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Mindent középre húzunk */
+    align-items: center; 
     padding: 30px 20px;
     box-sizing: border-box;
 }
+.mainmenu-loading {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(23, 23, 99);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 
-/* ================= TOP BAR (Jobb felső sarok) ================= */
+/* ================= TOP BAR  ================= */
 .mainmenu-topbar {
     width: 100%;
     max-width: 1000px;
     display: flex;
-    justify-content: flex-end; /* Kilöki a gombokat a jobb szélre! */
+    justify-content: flex-end; 
     gap: 15px;
     margin-bottom: 20px;
 }
@@ -121,7 +129,7 @@
 /* ================= TODO LIST ================= */
 .mainmenu-todo-section {
     width: 100%;
-    max-width: 1000px; /* Széles doboz, mint a rajzon */
+    max-width: 1000px; 
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
