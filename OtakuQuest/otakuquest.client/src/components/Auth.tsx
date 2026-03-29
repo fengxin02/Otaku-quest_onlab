@@ -8,7 +8,7 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [message, setMessage] = useState<string>('');
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
-
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
         // Listen for window resize events to update mobile state
@@ -23,6 +23,7 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         // Stop refreshing the page
         e.preventDefault();
         try {
+            setIsLoading(true);
             if (isLogin) {
                 const response = await AuthService.postApiAuthLogin({
                      username, password
@@ -47,9 +48,12 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         } catch (error: any) {
             setMessage(error.body?.message || 'Something went wrong at communication. Please try again.');
         }
+        finally {
+            setIsLoading(false);
+        }
 };
 
-return (
+return (isLoading) ? <div className="auth-loading">Logging in...</div> : (
         <div className="auth-wrapper">
           <h1 className="auth-main-title">Otaku Quest</h1>
             <div className="auth-container">
