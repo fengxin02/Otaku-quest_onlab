@@ -7,16 +7,27 @@ interface QuestBoardProps {
     showCompletedTasks: boolean
 }
 
+
+ const borderLeftColor: Record<number, string> = {
+    0: "#3b82f6",
+    1: "#10b981",
+    2: "#f59e0b",
+    3: "#8b5cf6",
+    4: "#000000",
+    5: "#ef4444"
+
+};
 const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTasks }) => {
     const [quests, setQuests] = useState<any[]>([]);
 
     const [loading, setLoading] = useState(true);
-    
+    const [expandedQuestId, setExpandedQuestId] = useState<number | null>(null);
     const [isAdding, setIsAdding] = useState(false);
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [description, setDescription] = useState('');
     const [type, setType] = useState<number>(0);
     const [difficultyRank, setDifficultyRank] = useState<number>(0);
+
 
     const fetchQuests = async () => {
         try {
@@ -70,6 +81,24 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
         }
     };
 
+    const toggleQuestDetails = (id: number) => {
+        if(expandedQuestId === id) {
+            setExpandedQuestId(null);
+        }else {
+            setExpandedQuestId(id);
+        }
+    }
+    //convert type number to string for display
+    const getTaskTypeName = (typeNum: number) => {
+        const types = ['Study', 'Workout', 'Hobby', 'Social', 'Health'];
+        return types[typeNum] || 'Unknown';
+    }
+    //convert difficulty rank number to string for display
+    const getDifficultyName = (rankNum: number) => {
+        const ranks = ['E Rank', 'D Rank', 'C Rank', 'B Rank', 'A Rank', 'S Rank'];
+        return ranks[rankNum] || 'Unknown';
+    }
+
     if (loading) return <div className="quest-loading">Searching for quests... </div>;
 
     return (
@@ -81,16 +110,34 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
                 ) : (
                     quests.map((quest) => (
                         (showCompletedTasks ? quest.status === 2 : quest.status === 1) && (
-                            <div key={quest.id} className="quest-card">
+                            <React.Fragment key={quest.id}>
+                            <div  
+                            className={`quest-card ${expandedQuestId === quest.id ? 'expanded' : ''}`} 
+                            style ={{borderLeft: `6px solid ${borderLeftColor[quest.difficultyRank]}`}}
+
+                            onClick={() => toggleQuestDetails(quest.id)}>
                                 <h4 className="quest-title">{quest.title}</h4>
                                 <button 
                                     className="complete-quest-btn" 
-                                    onClick={() => handleCompleteQuest(quest.id)}
+                                    onClick={(e) =>{
+                                        e.stopPropagation(); 
+                                        handleCompleteQuest(quest.id);}}
                                 >
                                     ✓ Complete
                                 </button>
                             </div>
-                        )
+                            {expandedQuestId === quest.id && (
+                                    <div className="quest-details">
+                                        <p><strong>Description:</strong> {quest.description || ''}</p>
+                                        <div className="quest-meta">
+                                            <span className="quest-badge">Type: {getTaskTypeName(quest.type)}</span>
+                                            <span className="quest-badge">Difficulty: {getDifficultyName(quest.difficultyRank)}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </React.Fragment>
+                    )
+                        
                     ))
                 )}
             </div>

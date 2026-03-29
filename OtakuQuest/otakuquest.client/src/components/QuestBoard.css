@@ -40,13 +40,52 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .quest-card:hover {
     transform: translateX(5px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #f1f5f9;
+}
+.quest-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.quest-details {
+    border-top: 1px solid #cbd5e1; 
+    padding-top: 12px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #475569;
+    font-size: 0.95rem;
+    animation: slideDown 0.3s ease-out; 
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.quest-meta {
+    display: flex;
+    gap: 15px;
+}
+
+.quest-badge {
+    background: #e2e8f0;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #334155;
 }
 
 .quest-title {
