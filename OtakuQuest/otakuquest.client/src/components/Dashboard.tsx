@@ -43,7 +43,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
     //const currentBackground = stats?.backgroundName || 'Default';
     //const bgSource = backgroundImages[currentBackground] || backgroundImages['Default'];
     const bgSource = backgroundImages['Default'];
-    const portraitSource = characterImages['Saki'];
+    const portraitSource = characterImages['Sakura'];
     return (
         <div className="dashboard-wrapper" style={{ 
                 backgroundImage: `url(${bgSource})`, 

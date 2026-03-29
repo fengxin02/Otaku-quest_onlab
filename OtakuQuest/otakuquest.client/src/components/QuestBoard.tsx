@@ -117,6 +117,7 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
 
                             onClick={() => toggleQuestDetails(quest.id)}>
                                 <h4 className="quest-title">{quest.title}</h4>
+                                {showCompletedTasks ? <span></span> :
                                 <button 
                                     className="complete-quest-btn" 
                                     onClick={(e) =>{
@@ -125,6 +126,7 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
                                 >
                                     ✓ Complete
                                 </button>
+                                }
                             </div>
                             {expandedQuestId === quest.id && (
                                     <div className="quest-details">
