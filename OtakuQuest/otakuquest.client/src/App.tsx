@@ -27,7 +27,7 @@ function App() {
         const token = localStorage.getItem('token');
         if(token) {
             fetchStats();
-            if(!fetchStats){
+            if(!playerStats){
                 localStorage.removeItem('token');
                 setPlayerStats(null);
                 setCurrentScreen('login');
