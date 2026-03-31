@@ -1,6 +1,5 @@
-import {  useEffect, useState} from "react";
 
-import { PlayerProfileService } from '../api/generated';
+import {  type PlayerStatsDto } from '../api/generated';
 import './Dashboard.css';
 import SakuraImage from '../assets/Sakura.png';
 import DefaultImage from '../assets/Default.png';
@@ -16,7 +15,7 @@ import DefaultBackground from '../assets/DefaultBackground.png';
 interface DashboardProps {
     onLogout: () => void;
     onBackToMenu: () => void;
-    stats: any;
+    stats: PlayerStatsDto | null;
 }
 
  const characterImages: Record<string, string> = {

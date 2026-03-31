@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OtakuQuest.Server.Data;
+using OtakuQuest.Server.DTOs;
 using System.Security.Claims;
 
 namespace OtakuQuest.Server.Controllers
@@ -19,7 +20,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpGet("my-stats")]
-        public IActionResult GetStats()
+        public ActionResult<PlayerStatsDto> GetStats()
         {
             //check the token
             // A "User" objektumot a .NET automatikusan feltölti a token alapján!
@@ -38,19 +39,21 @@ namespace OtakuQuest.Server.Controllers
                 return NotFound("Player not found");
             }
 
-            return Ok(new
+            var statsDto = new PlayerStatsDto
             {
-                player.Username,
-                player.Level,
-                player.XP,
-                player.Currency,
-                player.STR,
-                player.INT,
-                player.DEF,
-                player.CurrentHP,
-                player.MaxHP,
-                player.AvatarItemId,
-            });
+                Username = player.Username,
+                Level = player.Level,
+                XP = player.XP,
+                Currency = player.Currency,
+                STR = player.STR,
+                INT = player.INT,
+                DEF = player.DEF,
+                CurrentHP = player.CurrentHP,
+                MaxHP = player.MaxHP,
+                AvatarItemId = player.AvatarItemId
+            };
+
+            return Ok(statsDto);
         }
     }
 }

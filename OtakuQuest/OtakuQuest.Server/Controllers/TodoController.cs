@@ -22,7 +22,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTask([FromBody] CreateTaskDto dto)
+        public ActionResult<TodoTask> CreateTask([FromBody] CreateTaskDto dto)
         {
             //read thet Id from token
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -46,11 +46,11 @@ namespace OtakuQuest.Server.Controllers
             };
             _context.Tasks.Add(newTask);
             _context.SaveChanges();
-            return Ok(new { Message = "Successfully added a new Challenge", Task = newTask });
+            return Ok(newTask);
         }
 
         [HttpGet]
-        public IActionResult GetTasks()
+        public ActionResult<List<TodoTask>> GetTasks()
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userIdString == null)
@@ -64,7 +64,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpPost("{id}/complete")] //POST /api/todo/5/complete
-        public IActionResult CompleteTask(int id)
+        public ActionResult<CompleteTaskResponseDto> CompleteTask(int id)
         {
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userIdString == null)
@@ -170,7 +170,7 @@ namespace OtakuQuest.Server.Controllers
             }
 
             _context.SaveChanges();
-            return Ok(new
+            var responseDto = new CompleteTaskResponseDto
             {
                 Message = leveledUp ? "Challenge completed! Level UP!" : "Challenge completed successfully!",
                 XPReward = xp,
@@ -181,8 +181,9 @@ namespace OtakuQuest.Server.Controllers
                 NewLevel = player.Level,
                 CurrentXP = player.XP,
                 XpToNextLevel = xpForNextLevel - player.XP
+            };
 
-            });
+            return Ok(responseDto);
         }
     }
 }

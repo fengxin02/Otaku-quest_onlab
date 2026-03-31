@@ -3,11 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { DifficultyRank } from './DifficultyRank';
+import type { TaskStatus } from './TaskStatus';
 import type { TaskType } from './TaskType';
-export type CreateTaskDto = {
+import type { User } from './User';
+export type TodoTask = {
+    id: number;
+    userId: number;
+    user: User;
     title: string | null;
     description?: string | null;
     type: TaskType;
     difficultyRank: DifficultyRank;
+    status: TaskStatus;
+    createdAt: string;
 };
 

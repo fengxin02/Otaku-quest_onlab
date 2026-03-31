@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AuthResponseDto } from '../models/AuthResponseDto';
 import type { LoginDto } from '../models/LoginDto';
 import type { RegisterDto } from '../models/RegisterDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -25,12 +26,12 @@ export class AuthService {
     }
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns AuthResponseDto OK
      * @throws ApiError
      */
     public static postApiAuthLogin(
         requestBody?: LoginDto,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<AuthResponseDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Auth/login',

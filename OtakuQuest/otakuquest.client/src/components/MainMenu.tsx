@@ -7,9 +7,10 @@ import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
 import DefaultBackground from '../assets/DefaultBackground.png';
 import QuestBoard from './QuestBoard';
 import { useState } from 'react';
+import type { PlayerStatsDto } from '../api/generated';
 interface MainMenuProps {
     onNavigate: (screen: string) => void;
-    stats: any;
+    stats: PlayerStatsDto;
     loading: boolean;
     refreshStats: () => void;
 

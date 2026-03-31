@@ -45,7 +45,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto dto)
+        public ActionResult<AuthResponseDto> Login([FromBody] LoginDto dto)
         {
             var user = _context.Users.FirstOrDefault(u => u.Username == dto.Username);
             if (user == null)
@@ -79,7 +79,11 @@ namespace OtakuQuest.Server.Controllers
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-            return Ok(new { Token = tokenString, Message = $"Welcome back: {user.Username} \nYour level is: {user.Level}" });
+            return Ok(new AuthResponseDto
+            {
+                Token = tokenString,
+                Message = $"Welcome back: {user.Username} \nYour level is: {user.Level}"
+            });
         }
     }
 }

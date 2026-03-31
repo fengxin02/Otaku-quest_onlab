@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type LoginDto = {
-    username: string | null;
-    password: string | null;
+export type AuthResponseDto = {
+    token: string | null;
+    message: string | null;
 };
 

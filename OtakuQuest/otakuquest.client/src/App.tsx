@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import MainMenu from './components/MainMenu';
-import { PlayerProfileService } from './api/generated';
+import { PlayerProfileService, type PlayerStatsDto } from './api/generated';
 
 function App() {
-    const [playerStats, setPlayerStats] = useState<any>(null);
+    const [playerStats, setPlayerStats] = useState<PlayerStatsDto | null>(null);
     const [isStatsLoading, setIsStatsLoading] = useState<boolean>(true);
 
     const [currentScreen, setCurrentScreen] = useState<string>('login');

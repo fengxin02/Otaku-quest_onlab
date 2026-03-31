@@ -2,19 +2,21 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CompleteTaskResponseDto } from '../models/CompleteTaskResponseDto';
 import type { CreateTaskDto } from '../models/CreateTaskDto';
+import type { TodoTask } from '../models/TodoTask';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class TodoService {
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns TodoTask OK
      * @throws ApiError
      */
     public static postApiTodo(
         requestBody?: CreateTaskDto,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<TodoTask> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Todo',
@@ -23,10 +25,10 @@ export class TodoService {
         });
     }
     /**
-     * @returns any OK
+     * @returns TodoTask OK
      * @throws ApiError
      */
-    public static getApiTodo(): CancelablePromise<any> {
+    public static getApiTodo(): CancelablePromise<Array<TodoTask>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/Todo',
@@ -34,12 +36,12 @@ export class TodoService {
     }
     /**
      * @param id
-     * @returns any OK
+     * @returns CompleteTaskResponseDto OK
      * @throws ApiError
      */
     public static postApiTodoComplete(
         id: number,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<CompleteTaskResponseDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Todo/{id}/complete',
