@@ -10,8 +10,10 @@ function App() {
 
     const [currentScreen, setCurrentScreen] = useState<string>('login');
 
-    const fetchStats = async () => {
-        setIsStatsLoading(true); 
+    const fetchStats = async (isSilent: boolean = false) => {
+        if (!isSilent){
+            setIsStatsLoading(true);
+        }
         try {
             const response = await PlayerProfileService.getApiPlayerProfileMyStats();
             setPlayerStats(response);
@@ -60,7 +62,7 @@ function App() {
                           onNavigate={(screenName) => setCurrentScreen(screenName)} 
                           stats= {playerStats}
                           loading={isStatsLoading}
-                          refreshStats={fetchStats}
+                          refreshStats={() => fetchStats(true)}
                        />;
             
             case 'character':
