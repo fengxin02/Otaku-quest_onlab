@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace OtakuQuest.Server.Controllers
 {
@@ -23,23 +24,42 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpPost("register")] // POST /api/auth/register 
-        public IActionResult Register([FromBody] RegisterDto dto)
+        public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterDto dto)
         {
-            if (_context.Users.Any(u => u.Username == dto.Username))
+            if (await _context.Users.AnyAsync(u => u.Username == dto.Username))
             {
                 return BadRequest("This username is already taken");
             }
+            var defaultAvatar = await _context.Items.FirstOrDefaultAsync(i => i.Name == "Default Avatar");
+            if (defaultAvatar == null)
+            {
+                defaultAvatar = new Item { Name = "Default Avatar", Type = ItemType.Character, ImageAsset = "Saki" };
+                _context.Items.Add(defaultAvatar);
+            }
+
+            var defaultBackground = await _context.Items.FirstOrDefaultAsync(i => i.Name == "Default Background");
+            if (defaultBackground == null)
+            {
+                defaultBackground = new Item { Name = "Default Background", Type = ItemType.Background, ImageAsset = "Default" };
+                _context.Items.Add(defaultBackground);
+            }
+
+            await _context.SaveChangesAsync();
+
             //new user 
             var newUser = new User
             {
                 Username = dto.Username,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password) // Hash the password before storing
-
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password), // Hash the password before storing
+                EquippedAvatarId = defaultAvatar.Id,
+                EquippedBackgroundId = defaultBackground.Id
             };
 
             //save to database
             _context.Users.Add(newUser);
-            _context.SaveChanges();
+            _context.UserItems.Add(new UserItem { UserId = newUser.Id, ItemId = defaultAvatar.Id });
+            _context.UserItems.Add(new UserItem { UserId = newUser.Id, ItemId = defaultBackground.Id });
+            await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Registration was succeed, welcome to OtakuQuest " });
         }

@@ -40,9 +40,8 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading, refres
     const currentXp = stats.xp;
     const xpPercentage = Math.min((currentXp / xpNeededForNextLevel) * 100, 100);
 
-    const bgSource = backgroundImages['Default'];
-    const portraitSource = characterImages['Sakura'];
-
+    const portraitSource = characterImages[stats.avatarImage || 'Default'];
+    const bgSource = backgroundImages[stats.backgroundImage || 'Default'];
     return (
         <div className="mainmenu-wrapper" style={{
             backgroundImage: `url(${bgSource})`,

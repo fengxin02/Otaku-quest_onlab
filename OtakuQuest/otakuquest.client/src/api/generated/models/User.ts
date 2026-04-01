@@ -2,7 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Item } from './Item';
 import type { TodoTask } from './TodoTask';
+import type { UserItem } from './UserItem';
 export type User = {
     id: number;
     username: string | null;
@@ -18,5 +20,12 @@ export type User = {
     avatarItemId: number | null;
     backgroundItemId: number | null;
     tasks: Array<TodoTask> | null;
+    equippedWeaponId: number | null;
+    equippedWeapon: Item;
+    equippedAvatarId: number | null;
+    equippedAvatar: Item;
+    equippedBackgroundId: number | null;
+    equippedBackground: Item;
+    inventory: Array<UserItem> | null;
 };
 

@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type AuthResponseDto = {
-    token?: string | null;
-    message: string;
-};
-
+export enum ItemType {
+    '_0' = 0,
+    '_1' = 1,
+    '_2' = 2,
+}

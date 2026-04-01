@@ -8,10 +8,13 @@ export type PlayerStatsDto = {
     xp: number;
     currency: number;
     str: number;
-    int: number;
+    int : number;
     def: number;
     currentHP: number;
     maxHP: number;
-    avatarItemId: number | null;
+    avatarImage: string | null;
+    backgroundImage: string | null;
+    weaponImage: string | null;
+    weaponName: string | null;
 };
 

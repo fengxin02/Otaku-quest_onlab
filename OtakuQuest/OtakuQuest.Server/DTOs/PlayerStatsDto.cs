@@ -11,6 +11,11 @@
         public int DEF { get; set; }
         public int CurrentHP { get; set; }
         public int MaxHP { get; set; }
-        public int? AvatarItemId { get; set; }
+
+        public string? AvatarImage { get; set; }
+        public string? BackgroundImage { get; set; }
+        public string? WeaponImage { get; set; }
+
+        public string? WeaponName { get; set; }
     }
 }

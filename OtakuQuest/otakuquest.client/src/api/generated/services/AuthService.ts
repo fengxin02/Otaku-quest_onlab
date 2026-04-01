@@ -11,12 +11,12 @@ import { request as __request } from '../core/request';
 export class AuthService {
     /**
      * @param requestBody
-     * @returns any OK
+     * @returns AuthResponseDto OK
      * @throws ApiError
      */
     public static postApiAuthRegister(
         requestBody?: RegisterDto,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<AuthResponseDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Auth/register',

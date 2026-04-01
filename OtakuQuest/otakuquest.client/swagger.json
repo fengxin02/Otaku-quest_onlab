@@ -31,7 +31,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponseDto"
+                }
+              }
+            }
           }
         }
       }
@@ -367,6 +384,76 @@
         "type": "integer",
         "format": "int32"
       },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hpBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "strBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "intBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hpMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "strMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "intMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "defMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "imageAsset": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "LoginDto": {
         "type": "object",
         "properties": {
@@ -420,9 +507,20 @@
             "type": "integer",
             "format": "int32"
           },
-          "avatarItemId": {
-            "type": "integer",
-            "format": "int32",
+          "avatarImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "weaponImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "weaponName": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -564,6 +662,65 @@
               "$ref": "#/components/schemas/TodoTask"
             },
             "nullable": true
+          },
+          "equippedWeaponId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "equippedWeapon": {
+            "$ref": "#/components/schemas/Item"
+          },
+          "equippedAvatarId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "equippedAvatar": {
+            "$ref": "#/components/schemas/Item"
+          },
+          "equippedBackgroundId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "equippedBackground": {
+            "$ref": "#/components/schemas/Item"
+          },
+          "inventory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "itemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "item": {
+            "$ref": "#/components/schemas/Item"
+          },
+          "acquiredAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

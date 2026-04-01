@@ -24,5 +24,18 @@
         //1 User - N Tasks
         public ICollection<TodoTask> Tasks { get; set; } = new List<TodoTask>();
 
+        //Foreign Keys
+        public int? EquippedWeaponId { get; set; }
+        public Item? EquippedWeapon { get; set; }
+
+        public int? EquippedAvatarId { get; set; }
+        public Item? EquippedAvatar { get; set; }
+
+        public int? EquippedBackgroundId { get; set; }
+        public Item? EquippedBackground { get; set; }
+
+        // Every item the user has ever acquired, including equipped and unequipped items
+        public ICollection<UserItem> Inventory { get; set; } = new List<UserItem>();
+
     }
 }

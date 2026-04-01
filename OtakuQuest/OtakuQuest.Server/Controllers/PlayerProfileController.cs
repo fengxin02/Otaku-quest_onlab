@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OtakuQuest.Server.Data;
 using OtakuQuest.Server.DTOs;
 using System.Security.Claims;
@@ -20,7 +21,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpGet("my-stats")]
-        public ActionResult<PlayerStatsDto> GetStats()
+        public async Task<ActionResult<PlayerStatsDto>> GetStats()
         {
             //check the token
             // A "User" objektumot a .NET automatikusan feltölti a token alapján!
@@ -32,7 +33,11 @@ namespace OtakuQuest.Server.Controllers
             }
             var userId = int.Parse(userIdString);
 
-            var player = _context.Users.FirstOrDefault(u => u.Id  == userId);
+            var player = await _context.Users
+                .Include(u => u.EquippedAvatar)
+                .Include(u => u.EquippedBackground)
+                .Include(u => u.EquippedWeapon)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (player == null)
             {
@@ -50,7 +55,10 @@ namespace OtakuQuest.Server.Controllers
                 DEF = player.DEF,
                 CurrentHP = player.CurrentHP,
                 MaxHP = player.MaxHP,
-                AvatarItemId = player.AvatarItemId
+                AvatarImage = player.EquippedAvatar?.ImageAsset,
+                BackgroundImage = player.EquippedBackground?.ImageAsset,
+                WeaponImage = player.EquippedWeapon?.ImageAsset,
+                WeaponName = player.EquippedWeapon?.Name
             };
 
             return Ok(statsDto);

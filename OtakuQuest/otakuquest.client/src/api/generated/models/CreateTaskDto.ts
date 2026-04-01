@@ -6,7 +6,7 @@ import type { DifficultyRank } from './DifficultyRank';
 import type { TaskType } from './TaskType';
 export type CreateTaskDto = {
     title: string | null;
-    description?: string | null;
+    description: string | null;
     type: TaskType;
     difficultyRank: DifficultyRank;
 };

@@ -47,7 +47,7 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
             }
         } catch (error) {
             const apiError = error as ApiError;
-            setMessage(apiError.body?.message || 'Something went wrong at communication. Please try again.');
+            setMessage(apiError.body?.message || 'Something went wrong at communication or your username or password is incorrect. Please try again.');
         }
         finally {
             setIsLoading(false);
