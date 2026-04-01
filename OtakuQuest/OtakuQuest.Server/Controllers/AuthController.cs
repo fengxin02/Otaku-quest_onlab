@@ -44,7 +44,6 @@ namespace OtakuQuest.Server.Controllers
                 _context.Items.Add(defaultBackground);
             }
 
-            await _context.SaveChangesAsync();
 
             //new user 
             var newUser = new User
@@ -52,13 +51,16 @@ namespace OtakuQuest.Server.Controllers
                 Username = dto.Username,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password), // Hash the password before storing
                 EquippedAvatarId = defaultAvatar.Id,
-                EquippedBackgroundId = defaultBackground.Id
+                EquippedBackgroundId = defaultBackground.Id,
+                Inventory = new List<UserItem>
+                {
+                    new UserItem { ItemId = defaultAvatar.Id },
+                    new UserItem { ItemId = defaultBackground.Id }
+                }
             };
 
             //save to database
             _context.Users.Add(newUser);
-            _context.UserItems.Add(new UserItem { UserId = newUser.Id, ItemId = defaultAvatar.Id });
-            _context.UserItems.Add(new UserItem { UserId = newUser.Id, ItemId = defaultBackground.Id });
             await _context.SaveChangesAsync();
 
             return Ok(new { Message = "Registration was succeed, welcome to OtakuQuest " });

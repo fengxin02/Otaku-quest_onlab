@@ -9,6 +9,7 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const [message, setMessage] = useState<string>('');
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isRegistering, setIsRegistering] = useState<boolean>(false);
 
     useEffect(() => {
         // Listen for window resize events to update mobile state
@@ -23,8 +24,9 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         // Stop refreshing the page
         e.preventDefault();
         try {
-            setIsLoading(true);
             if (isLogin) {
+                setIsLoading(true);
+
                 const response = await AuthService.postApiAuthLogin({
                      username, password
                     });
@@ -37,11 +39,12 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
                 onLoginSuccess();
 
             } else {
+                setIsRegistering(true);
                 const response = await AuthService.postApiAuthRegister({
                      username, password
                     });
                 
-                setMessage(response.message);
+                setMessage(response.message || 'Character created successfully! Please log in.');
                 setIsLogin(true);
                 setPassword('');
             }
@@ -50,9 +53,14 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
             setMessage(apiError.body?.message || 'Something went wrong at communication or your username or password is incorrect. Please try again.');
         }
         finally {
+            setIsRegistering(false);
             setIsLoading(false);
         }
 };
+
+if(isRegistering) {
+    return <div className="auth-loading">Creating character...</div>;
+}
 
 return (isLoading) ? <div className="auth-loading">Logging in...</div> : (
         <div className="auth-wrapper">
