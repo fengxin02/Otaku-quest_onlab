@@ -10,7 +10,7 @@ import { useState } from 'react';
 import type { PlayerStatsDto } from '../api/generated';
 interface MainMenuProps {
     onNavigate: (screen: string) => void;
-    stats: PlayerStatsDto;
+    stats: PlayerStatsDto | null;
     loading: boolean;
     refreshStats: () => void;
 

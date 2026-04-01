@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AuthService } from '../api/generated';
+import { ApiError, AuthService } from '../api/generated';
 import './Auth.css'; 
 
 const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
@@ -45,8 +45,9 @@ const Auth = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
                 setIsLogin(true);
                 setPassword('');
             }
-        } catch (error: any) {
-            setMessage(error.body?.message || 'Something went wrong at communication. Please try again.');
+        } catch (error) {
+            const apiError = error as ApiError;
+            setMessage(apiError.body?.message || 'Something went wrong at communication. Please try again.');
         }
         finally {
             setIsLoading(false);
