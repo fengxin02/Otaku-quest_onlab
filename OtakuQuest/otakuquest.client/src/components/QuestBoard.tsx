@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TodoService, type TodoTask } from '../api/generated'; 
+import { TodoService, type DifficultyRank, type TodoTask } from '../api/generated'; 
 import './QuestBoard.css';
 
 interface QuestBoardProps {
@@ -25,8 +25,8 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
     const [isAdding, setIsAdding] = useState(false);
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [type, setType] = useState<number>(0);
-    const [difficultyRank, setDifficultyRank] = useState<number>(0);
+    const [type, setType] = useState<TodoTask['type']>(0);
+    const [difficultyRank, setDifficultyRank] = useState<DifficultyRank>(0);
 
 
     const fetchQuests = async () => {

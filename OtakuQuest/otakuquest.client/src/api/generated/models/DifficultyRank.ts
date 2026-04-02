@@ -2,11 +2,4 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export enum DifficultyRank {
-    '_0' = 0,
-    '_1' = 1,
-    '_2' = 2,
-    '_3' = 3,
-    '_4' = 4,
-    '_5' = 5,
-}
+export type DifficultyRank = 0 | 1 | 2 | 3 | 4 | 5;

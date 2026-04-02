@@ -1,0 +1,21 @@
+# =========================
+# OtakuQuest Server Ignores
+# =========================
+
+appsettings.json
+appsettings.Production.json
+
+!appsettings.example.json
+
+bin/
+obj/
+
+.vs/
+
+.DS_Store
+
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.db

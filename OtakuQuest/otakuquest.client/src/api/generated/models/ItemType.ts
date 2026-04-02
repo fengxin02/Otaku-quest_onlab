@@ -2,8 +2,4 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export enum ItemType {
-    '_0' = 0,
-    '_1' = 1,
-    '_2' = 2,
-}
+export type ItemType = 0 | 1 | 2;

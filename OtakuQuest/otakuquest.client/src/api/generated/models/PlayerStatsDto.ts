@@ -3,18 +3,18 @@
 /* tslint:disable */
 /* eslint-disable */
 export type PlayerStatsDto = {
-    username: string | null;
+    username: string;
     level: number;
     xp: number;
     currency: number;
     str: number;
-    int : number;
+    int: number;
     def: number;
     currentHP: number;
     maxHP: number;
-    avatarImage: string | null;
-    backgroundImage: string | null;
-    weaponImage: string | null;
-    weaponName: string | null;
+    avatarImage?: string | null;
+    backgroundImage?: string | null;
+    weaponImage?: string | null;
+    weaponName?: string | null;
 };
 

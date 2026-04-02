@@ -10,8 +10,8 @@ export type TodoTask = {
     id: number;
     userId: number;
     user: User;
-    title: string | null;
-    description: string | null;
+    title: string;
+    description?: string | null;
     type: TaskType;
     difficultyRank: DifficultyRank;
     status: TaskStatus;

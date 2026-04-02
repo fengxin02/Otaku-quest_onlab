@@ -10,6 +10,6 @@ export type UserItem = {
     user: User;
     itemId: number;
     item: Item;
-    acquiredAt: string;
+    acquiredAt?: string;
 };
 

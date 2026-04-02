@@ -1,12 +1,18 @@
-﻿namespace OtakuQuest.Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OtakuQuest.Server.Models
 {
     public class Item
     {
+        [Required]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; } = string.Empty;
+        [Required]
         public string Description { get; set; } = string.Empty;
+        [Required]
         public ItemType Type { get; set; }
-
+        [Required]
         public int Price { get; set; }
 
         public int HpBonus { get; set; }
@@ -21,6 +27,7 @@
 
 
         // The name what we send to the frontend (like: "Sakura.png")
+        [Required]
         public string ImageAsset { get; set; } = string.Empty;
     }
 }

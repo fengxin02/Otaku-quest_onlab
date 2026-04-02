@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-api": "openapi --input ./swagger.json --output ./src/api/generated --client axios"
+    "generate-api": "openapi --input ./swagger.json --output ./src/api/generated --client axios --useUnionTypes"
   },
   "dependencies": {
     "axios": "^1.13.6",

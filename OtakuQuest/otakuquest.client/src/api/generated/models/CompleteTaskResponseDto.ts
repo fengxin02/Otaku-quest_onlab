@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type CompleteTaskResponseDto = {
-    message: string | null;
+    message: string;
     xpReward: number;
     currencyReward: number;
     strengthReward: number;

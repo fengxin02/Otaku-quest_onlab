@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type RegisterDto = {
-    username: string | null;
-    password: string | null;
+    username: string;
+    password: string;
 };
 

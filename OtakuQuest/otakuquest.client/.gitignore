@@ -12,9 +12,6 @@ dist
 dist-ssr
 *.local
 
-# Ignore sensitive configuration files
-appsettings.json
-appsettings.Development.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
