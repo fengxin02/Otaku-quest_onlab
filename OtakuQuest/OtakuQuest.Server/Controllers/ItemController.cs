@@ -125,6 +125,39 @@ namespace OtakuQuest.Server.Controllers
 
             return Ok(myItems);
         }
+        [HttpPost("create")]
+        // Opcionális: Ha az egész controlleren ott van fent az [Authorize], 
+        // de te ezt könnyen akarod tesztelni token nélkül is Swaggerből, 
+        // akkor vedd ki a kommentből az alábbi sort:
+        // [AllowAnonymous] 
+        public async Task<IActionResult> CreateItem([FromBody] CreateItemDto dto)
+        {
+            var newItem = new Item
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Type = dto.Type,
+                Price = dto.Price,
+                ImageAsset = dto.ImageAsset,
+                HpBonus = dto.HpBonus,
+                StrBonus = dto.StrBonus,
+                IntBonus = dto.IntBonus,
+                DefBonus = dto.DefBonus,
+                HpMultiplier = dto.HpMultiplier,
+                StrMultiplier = dto.StrMultiplier,
+                IntMultiplier = dto.IntMultiplier,
+                DefMultiplier = dto.DefMultiplier
+            };
+
+            _context.Items.Add(newItem);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                Message = $"Sikeresen létrehoztad a tárgyat: {newItem.Name}",
+                Item = newItem
+            });
+        }
     }
 }
 
