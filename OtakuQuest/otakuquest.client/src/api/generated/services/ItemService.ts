@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BuyItemDto } from '../models/BuyItemDto';
+import type { CreateItemDto } from '../models/CreateItemDto';
 import type { EquipItemDto } from '../models/EquipItemDto';
 import type { Item } from '../models/Item';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -57,6 +58,21 @@ export class ItemService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/Item/inventory',
+        });
+    }
+    /**
+     * @param requestBody
+     * @returns any OK
+     * @throws ApiError
+     */
+    public static postApiItemCreate(
+        requestBody?: CreateItemDto,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Item/create',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 }

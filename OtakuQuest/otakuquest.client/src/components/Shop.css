@@ -1,0 +1,231 @@
+.shop-wrapper {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.shop-loading{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(23, 23, 99);
+    font-size: 1.5rem;
+    font-weight: bold;
+
+}
+.shop-container {
+    width: 100%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Fejléc --- */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    background: #334155;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.back-btn:hover {
+    background: #475569;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.shop-title {
+    color: #3b82f6;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+.shop-currency {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #0f172a;
+    border: 2px solid #cbd5e1;
+}
+.shop-currency:hover {
+    background: #e2e8f0;
+    border-color: #94a3b8;
+}
+
+.gem-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* --- Rajzolt TABS (Fülek) --- */
+.shop-tabs {
+    display: flex;
+    width: 100%;
+    border: 2px solid #000; 
+    border-radius: 8px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.tab-btn {
+    flex: 1;
+    background: white;
+    border: none;
+    border-right: 3px solid #000;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b82f6;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.tab-btn:last-child {
+    border-right: none;
+}
+
+.tab-btn:hover {
+    background: #f8fafc;
+}
+
+.tab-btn.active {
+    box-shadow: inset 0 0 0 3px #ef4444; 
+    color: #ef4444;
+    background: #fff5f5;
+}
+
+/* --- Kártyák és Grid --- */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.shop-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.shop-card.owned {
+    opacity: 0.7;
+    border-color: #10b981;
+}
+
+.item-name {
+    margin: 0 0 15px 0;
+    color: #ef4444;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.item-image-container {
+    height: 250px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.item-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.item-desc {
+    color: #64748b;
+    text-align: center;
+    font-size: 0.95rem;
+    flex-grow: 1; /* Kitölti a maradék helyet */
+}
+
+/* --- Gombok alul --- */
+.item-footer {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.buy-btn {
+    width: 100%;
+    background: #ef4444; /* Piros ár a rajzod alapján */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.buy-btn:hover:not(.disabled) {
+    background: #dc2626;
+}
+
+.buy-btn.disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+.owned-btn {
+    background: #10b981; /* Zöld, ha már megvan */
+    cursor: default;
+}
+
+
+.empty-shop {
+    text-align: center;
+    color: #64748b;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+.shop-message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.shop-message.success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+.shop-message.error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }

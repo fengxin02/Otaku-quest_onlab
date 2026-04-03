@@ -1,15 +1,9 @@
 
 import {  type PlayerStatsDto } from '../api/generated';
 import './Dashboard.css';
-import SakuraImage from '../assets/Sakura.png';
-import DefaultImage from '../assets/Default.png';
-import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
-import Heart from '../assets/heart.png';
-import Primogem from '../assets/primogem.png';
-import Strengthicon from '../assets/strength.png';
-import Defenseicon from '../assets/DoranShield.png';
-import Intelligenceicon from '../assets/eldenring.png';
-import DefaultBackground from '../assets/DefaultBackground.png';
+
+
+import { AllAssets, AvatarAssets, BackgroundAssets } from '../assets';
 
 
 interface DashboardProps {
@@ -17,17 +11,6 @@ interface DashboardProps {
     onBackToMenu: () => void;
     stats: PlayerStatsDto | null;
 }
-
- const characterImages: Record<string, string> = {
-    'Sakura': SakuraImage,
-    // 'Kenji': KenjiImage,
-    'Default': DefaultImage,
-    'Saki': TogawaSakikoImage,
-};
-const backgroundImages: Record<string, string> = {
-    'Default': DefaultBackground,
-    // Add more background images as needed
-};
 
 const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) => {
 
@@ -43,8 +26,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
     //const bgSource = backgroundImages[currentBackground] || backgroundImages['Default'];
     //const bgSource = backgroundImages['Default'];
     //const portraitSource = characterImages['Sakura'];
-    const portraitSource = characterImages[stats.avatarImage || 'Default'];
-    const bgSource = backgroundImages[stats.backgroundImage || 'Default'];
+    const portraitSource = AvatarAssets[stats.avatarImage || 'Default'];
+    const bgSource = BackgroundAssets[stats.backgroundImage || 'Default'];
     return (
         <div className="dashboard-wrapper" style={{ 
                 backgroundImage: `url(${bgSource})`, 
@@ -91,14 +74,14 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
                             <div className="stats-and-equip-grid">
                                 <div className="stat-column">
                                     <div className="stat-box vital-box">
-                                        <p ><img className="stat-icon" src={Heart} alt="Health" /> Health: <span> {stats.currentHP} / {stats.maxHP}</span></p>
-                                        <p><img className="stat-icon" src={Primogem} alt="Primogem" /> Gems: <span>{stats.currency}</span></p>
+                                        <p ><img className="stat-icon" src={AllAssets['Heart']} alt="Health" /> Health: <span> {stats.currentHP} / {stats.maxHP}</span></p>
+                                        <p><img className="stat-icon" src={AllAssets['Primogem']} alt="Primogem" /> Gems: <span>{stats.currency}</span></p>
                                     </div>
                                     
                                     <div className="stat-box attributes-box">
-                                        <p><img className="stat-icon" src={Strengthicon} alt="Strength" /> Strength (STR): <span>{stats.str}</span></p>
-                                        <p><img className="stat-icon" src={Intelligenceicon} alt="Intelligence" /> Intelligence (INT): <span>{stats.int}</span></p>
-                                        <p><img className="stat-icon" src={Defenseicon} alt="Defense" /> Defense (DEF): <span>{stats.def}</span></p>
+                                        <p><img className="stat-icon" src={AllAssets['Strength']} alt="Strength" /> Strength (STR): <span>{stats.str}</span></p>
+                                        <p><img className="stat-icon" src={AllAssets['Intelligence']} alt="Intelligence" /> Intelligence (INT): <span>{stats.int}</span></p>
+                                        <p><img className="stat-icon" src={AllAssets['Defense']} alt="Defense" /> Defense (DEF): <span>{stats.def}</span></p>
                                     </div>
                                 </div>
                             </div>

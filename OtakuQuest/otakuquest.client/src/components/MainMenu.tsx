@@ -1,10 +1,8 @@
 
 import './MainMenu.css';
 
-import SakuraImage from '../assets/Sakura.png';
-import DefaultImage from '../assets/Default.png';
-import TogawaSakikoImage from '../assets/Togawa_Sakiko.png';
-import DefaultBackground from '../assets/DefaultBackground.png';
+import { AvatarAssets, BackgroundAssets } from '../assets';
+
 import QuestBoard from './QuestBoard';
 import { useState } from 'react';
 import type { PlayerStatsDto } from '../api/generated';
@@ -16,15 +14,7 @@ interface MainMenuProps {
 
 }
 
-const characterImages: Record<string, string> = {
-    'Sakura': SakuraImage,
-    'Default': DefaultImage,
-    'Saki': TogawaSakikoImage,
-};
 
-const backgroundImages: Record<string, string> = {
-    'Default': DefaultBackground,
-};
 
 
 
@@ -40,8 +30,8 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading, refres
     const currentXp = stats.xp;
     const xpPercentage = Math.min((currentXp / xpNeededForNextLevel) * 100, 100);
 
-    const portraitSource = characterImages[stats.avatarImage || 'Default'];
-    const bgSource = backgroundImages[stats.backgroundImage || 'Default'];
+    const portraitSource = AvatarAssets[stats.avatarImage || 'Default'];
+    const bgSource = BackgroundAssets[stats.backgroundImage || 'Default'];
     return (
         <div className="mainmenu-wrapper" style={{
             backgroundImage: `url(${bgSource})`,
@@ -51,6 +41,9 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading, refres
         }}>
             
             <div className="mainmenu-topbar">
+                <button className="shop-btn" onClick={() => onNavigate('shop')}>
+                    Shop
+                </button>
                 <button className="profile-btn" onClick={() => onNavigate('character')}>
                     {stats.username}
                 </button>

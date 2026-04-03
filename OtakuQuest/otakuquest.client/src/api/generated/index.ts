@@ -10,6 +10,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { AuthResponseDto } from './models/AuthResponseDto';
 export type { BuyItemDto } from './models/BuyItemDto';
 export type { CompleteTaskResponseDto } from './models/CompleteTaskResponseDto';
+export type { CreateItemDto } from './models/CreateItemDto';
 export type { CreateTaskDto } from './models/CreateTaskDto';
 export type { DifficultyRank } from './models/DifficultyRank';
 export type { EquipItemDto } from './models/EquipItemDto';

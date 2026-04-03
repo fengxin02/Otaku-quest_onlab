@@ -22,7 +22,7 @@
     width: 100%;
     max-width: 1000px;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: space-between; 
     gap: 15px;
     margin-bottom: 20px;
 }
@@ -44,6 +44,25 @@
     transform: translateY(-3px);
     background: #ffffff;
 }
+
+.shop-btn {
+    background: #f59e0b;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.shop-btn:hover {
+    transform: translateY(-3px);
+    background: #d97706;
+}
+
 
 
 

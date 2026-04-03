@@ -173,7 +173,7 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
                             <select 
                                 className="add-quest-select"
                                 value={type}
-                                onChange={(e) => setType(Number(e.target.value))}
+                                onChange={(e) => setType(Number(e.target.value) as TodoTask['type'])}
                             >
                                 <option value={0}>Study</option>
                                 <option value={1}>Workout</option>
@@ -188,7 +188,7 @@ const QuestBoard: React.FC<QuestBoardProps> = ({ refreshStats, showCompletedTask
                             <select 
                                 className="add-quest-select"
                                 value={difficultyRank}
-                                onChange={(e) => setDifficultyRank(Number(e.target.value))}
+                                onChange={(e) => setDifficultyRank(Number(e.target.value) as DifficultyRank)}
                             >
                                 <option value={0}>E Rank</option>
                                 <option value={1}>D Rank</option>

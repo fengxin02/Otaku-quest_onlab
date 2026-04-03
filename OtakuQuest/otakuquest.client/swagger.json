@@ -239,6 +239,37 @@
         }
       }
     },
+    "/api/Item/create": {
+      "post": {
+        "tags": [
+          "Item"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateItemDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/PlayerProfile/my-stats": {
       "get": {
         "tags": [
@@ -514,6 +545,70 @@
           "xpToNextLevel": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateItemDto": {
+        "required": [
+          "description",
+          "imageAsset",
+          "name",
+          "price",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemType"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "imageAsset": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "hpBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "strBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "intBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "defBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hpMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "strMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "intMultiplier": {
+            "type": "number",
+            "format": "float"
+          },
+          "defMultiplier": {
+            "type": "number",
+            "format": "float"
           }
         },
         "additionalProperties": false
