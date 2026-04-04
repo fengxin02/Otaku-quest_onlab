@@ -1,18 +1,47 @@
 
-import {  type PlayerStatsDto } from '../api/generated';
+import {  ItemService, type Item, type PlayerStatsDto } from '../api/generated';
 import './Dashboard.css';
 
 
 import { AllAssets, AvatarAssets, BackgroundAssets } from '../assets';
+import { useState } from 'react';
 
 
 interface DashboardProps {
     onLogout: () => void;
     onBackToMenu: () => void;
     stats: PlayerStatsDto | null;
+    refreshStats: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , refreshStats}) => {
+    const [showEquipModal, setShowEquipModal] = useState(false);
+    const [equipType, setEquipType] = useState<number>(1); // 1 = Character/Avatar, 2 = Background
+    const [myItems, setMyItems] = useState<Item[]>([]);
+    
+    const handleOpenModal = async (type: number) => {
+        setEquipType(type);
+        setShowEquipModal(true);
+        try {
+            const inventory = await ItemService.getApiItemInventory();
+            setMyItems(inventory.filter((item: Item) => item.type === type));
+        } catch (error) {
+            console.error("Error to reach the inventory:", error);
+        }
+    };
+
+    const handleEquip = async (itemId: number) => {
+        try {
+            await ItemService.postApiItemEquip({ itemId });
+            setShowEquipModal(false);
+            refreshStats();
+        } catch (error) {
+            console.error("Error to equip item:", error);
+        }
+    };
+
+
+
 
     if(!stats) {
         return null;
@@ -26,19 +55,26 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
     //const bgSource = backgroundImages[currentBackground] || backgroundImages['Default'];
     //const bgSource = backgroundImages['Default'];
     //const portraitSource = characterImages['Sakura'];
-    const portraitSource = AvatarAssets[stats.avatarImage || 'Default'];
-    const bgSource = BackgroundAssets[stats.backgroundImage || 'Default'];
     return (
         <div className="dashboard-wrapper" style={{ 
-                backgroundImage: `url(${bgSource})`, 
+                backgroundImage: `url(${BackgroundAssets[stats.backgroundImage || 'DefaultBackground']})`, 
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 
                 backgroundRepeat: 'no-repeat' 
             }}>
-
-            <div className="dashboard-layout-column">
                 
-                <button onClick={onBackToMenu} className="back-to-menu-btn">Back</button>
+          
+            <div className="dashboard-layout-column">
+                <div className="dashboard-topbar">
+                    
+                    <button onClick={onBackToMenu} className="back-to-menu-btn">Back</button>
+                    <button className="equip-btn" onClick={() => handleOpenModal(1)}>
+                        Character
+                    </button>
+                    <button className="equip-btn" onClick={() => handleOpenModal(2)}>
+                        Background
+                    </button>
+                </div>
                 
                 <div className="dashboard-cards-row">
                     
@@ -47,7 +83,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
                         {/* Left site Character Portrait */}
                         <div className="character-portrait-section">
                             <div className="portrait-placeholder">
-                                <img className="portrait-img" src={portraitSource} alt="Character Portrait" />
+                                <img className="portrait-img" src={AvatarAssets[stats.avatarImage || 'DefaultAvatar']} alt="Character Portrait" />
                             </div>
                             <div className="character-name-badge">
                                 {stats.username} 
@@ -88,7 +124,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
                         </div>
 
                     </div> 
-
+            
                     <div className="dashboard-card-weapons">
                         <div className="equip-column">
                             <div className="equip-slot-box">
@@ -105,7 +141,34 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats }) 
                 </div> 
 
             </div>
+            {showEquipModal && (
+                <div className="equip-modal-overlay">
+                    <div className="equip-modal">
+                        <h2>Select your {equipType === 1 ? 'Character' : 'Background'}</h2>
+                        <button className="close-modal-btn" onClick={() => setShowEquipModal(false)}>✖</button>
+                        
+                        <div className="equip-grid">
+                            {myItems.length === 0 ? (
+                                <p>No items available.</p>
+                            ) : (
+                                myItems.map(item => (
+                                    <div key={item.id} className="equip-item-card">
+
+                                        <img src={AllAssets[item.imageAsset]} alt={item.name} />
+                                        <p>{item.name}</p>
+                                        <button onClick={() => handleEquip(item.id)}>
+                                            Choose
+                                        </button>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
+
+        
     );
 
 }

@@ -3,6 +3,108 @@
     --stat-text-color: #ffffff;
 }
 
+
+
+.equip-btn {
+    background: rgba(30, 41, 59, 0.85);
+    color: white;
+    border: 2px solid #334155;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.equip-btn:hover {
+   background: rgba(51, 65, 85, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* --- FELUGRÓ ABLAK (MODAL) --- */
+.equip-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Sötétítő réteg */
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.equip-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #94a3b8;
+}
+
+.close-modal-btn:hover {
+    color: #ef4444;
+}
+
+.equip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.equip-item-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.equip-item-card img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.equip-item-card button {
+    margin-top: auto;
+    width: 100%;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.equip-item-card button:hover {
+    background: #2563eb;
+}
+
+
 .dashboard-wrapper {
     min-height: 100vh;
     width: 100%;
@@ -20,6 +122,13 @@
     gap: 20px; /* Distance between the button and the cards */
     width: 100%;
     max-width: 1400px; /* So that the cards are aligned at the edges */
+}
+.dashboard-topbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 300px;
 }
 
 .dashboard-cards-row {

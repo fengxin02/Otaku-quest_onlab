@@ -54,14 +54,14 @@ const Shop: React.FC<ShopProps> = ({ onBackToMenu, stats, refreshStats }) => {
         setLoading(false);
         setMessage(null);
         if (stats!.currency < item.price) {
-            setMessage({ text: "Nincs elég Gemed ehhez a tárgyhoz!", type: 'error' });
+            setMessage({ text: "You don`t have enough gems to buy this item!", type: 'error' });
             return;
         }
 
         try {
             await ItemService.postApiItemBuy({ itemId: item.id });
             
-            setMessage({ text: `Sikeresen megvásároltad: ${item.name}!`, type: 'success' });
+            setMessage({ text: `Successfully purchased: ${item.name}!`, type: 'success' });
             setIsSilentLoading(true);
             fetchShopData();
             refreshStats();

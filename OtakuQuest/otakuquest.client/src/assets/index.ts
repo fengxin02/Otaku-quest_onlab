@@ -13,7 +13,7 @@ import Defenseicon from '../assets/DoranShield.png';
 import Intelligenceicon from '../assets/eldenring.png';
 
 export const AvatarAssets: Record<string, string> = {
-    'Default': DefaultImage,
+    'DefaultAvatar': DefaultImage,
     'Sakura': SakuraImage,
     'Saki': TogawaSakikoImage,
     'Luluka': Luluka,
@@ -21,14 +21,14 @@ export const AvatarAssets: Record<string, string> = {
 };
 
 export const BackgroundAssets: Record<string, string> = {
-    'Default': DefaultBackground,
+    'DefaultBackground': DefaultBackground,
     'CyberPunk': CyberPunkBackground,
 };
 
 export const WeaponAssets: Record<string, string> = {
-    'Default': DefaultBackground,
+    'DefaultWeapon': DefaultBackground,
 };
-
+    
 export const AllAssets: Record<string, string> = {
     ...AvatarAssets,
     ...BackgroundAssets,

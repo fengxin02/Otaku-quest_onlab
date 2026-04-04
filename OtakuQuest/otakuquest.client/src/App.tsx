@@ -71,6 +71,7 @@ function App() {
                           onBackToMenu={() => setCurrentScreen('mainmenu')} 
                           onLogout={handleLogout} 
                           stats={playerStats}
+                          refreshStats={() => fetchStats(true)}
                        />;
 
             case 'shop':
