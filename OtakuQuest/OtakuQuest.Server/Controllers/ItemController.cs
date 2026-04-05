@@ -69,13 +69,18 @@ namespace OtakuQuest.Server.Controllers
         public async Task<IActionResult> EquipItem([FromBody] EquipItemDto dto)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-            var player = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var player = await _context.Users
+                .Include(u => u.EquippedWeapon)
+                .Include(u => u.EquippedAvatar)
+                .Include(u => u.EquippedBackground)
+                .FirstOrDefaultAsync(u => u.Id == userId);
             if (player == null)
             {
                 return NotFound("Player not found");
             }
 
-            var itemExist = await _context.Items.FirstOrDefaultAsync(i => i.Id == dto.ItemId);
+            var itemExist = await _context.Items.
+                FirstOrDefaultAsync(i => i.Id == dto.ItemId);
             if (itemExist == null)
             {
                 return NotFound("Item not found");
@@ -88,19 +93,33 @@ namespace OtakuQuest.Server.Controllers
                 return BadRequest("You don't own this item!");
             }
             var itemToEquip = userItem.Item;
+
+            bool wasFullHp = player.CurrentHP >= player.TotalMaxHP;
             switch (itemToEquip.Type)
             {
                 case ItemType.Weapon:
                     player.EquippedWeaponId = itemToEquip.Id;
+                    player.EquippedWeapon = itemToEquip;
                     break;
                 case ItemType.Character:
                     player.EquippedAvatarId = itemToEquip.Id;
+                    player.EquippedAvatar = itemToEquip;
                     break;
                 case ItemType.Background:
                     player.EquippedBackgroundId = itemToEquip.Id;
+                    player.EquippedBackground = itemToEquip;
                     break;
                 default:
                     return BadRequest("Invalid item type!");
+            }
+
+            if (wasFullHp)
+            {
+                player.CurrentHP = player.TotalMaxHP;
+            }
+            else if (player.CurrentHP > player.TotalMaxHP)
+            {
+                player.CurrentHP = player.TotalMaxHP;
             }
             await _context.SaveChangesAsync();
             return Ok(new { Message = $"Successfully equipped {itemToEquip.Name}!" });

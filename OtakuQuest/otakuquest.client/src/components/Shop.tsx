@@ -5,6 +5,7 @@ import { AllAssets, AvatarAssets, BackgroundAssets, WeaponAssets } from '../asse
 import './Shop.css';
 import { useState, useEffect } from "react";
 import { ApiError, ItemService, type Item } from "../api/generated";
+import ItemDetailsModal from "./ItemDetailsModal";
 
 interface ShopProps {
     onBackToMenu: () => void;
@@ -23,6 +24,7 @@ const Shop: React.FC<ShopProps> = ({ onBackToMenu, stats, refreshStats }) => {
     const [activeTab, setActiveTab] = useState<number>(1); // 1 = Avatar/Character Images, 2 = Backgrounds, 3 = Weapons
     const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
     const [isSilentLoading, setIsSilentLoading] = useState(false);
+    const [inspectItem, setInspectItem] = useState<Item | null>(null);
 
     const fetchShopData = async () => {
         try {
@@ -157,6 +159,12 @@ const Shop: React.FC<ShopProps> = ({ onBackToMenu, stats, refreshStats }) => {
                                                 {item.price} Gem
                                             </button>
                                         )}
+                                        <button 
+                                            className="buy-btn"
+                                            onClick={() => setInspectItem(item)}
+                                        >
+                                            Details
+                                        </button>
                                     </div>
                                 </div>
                             );
@@ -165,6 +173,18 @@ const Shop: React.FC<ShopProps> = ({ onBackToMenu, stats, refreshStats }) => {
                 </div>
 
             </div>
+            {inspectItem && (
+            <ItemDetailsModal 
+                item={inspectItem}
+                onClose={() => setInspectItem(null)}
+                onAction={() => {
+                    handleBuyItem(inspectItem);
+                    setInspectItem(null);
+                }}
+                actionText={isOwned(inspectItem.id) ? "Already Owned" : `Buy (${inspectItem.price} Gem)`}
+                actionDisabled={isOwned(inspectItem.id) || stats.currency < inspectItem.price}
+            />
+        )}
         </div>
     );
 };

@@ -5,6 +5,7 @@ import './Dashboard.css';
 
 import { AllAssets, AvatarAssets, BackgroundAssets } from '../assets';
 import { useState } from 'react';
+import ItemDetailsModal from './ItemDetailsModal';
 
 
 interface DashboardProps {
@@ -18,7 +19,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
     const [showEquipModal, setShowEquipModal] = useState(false);
     const [equipType, setEquipType] = useState<number>(1); // 1 = Character/Avatar, 2 = Background
     const [myItems, setMyItems] = useState<Item[]>([]);
-    
+    const [inspectEquipItem, setInspectEquipItem] = useState<Item | null>(null);
+
     const handleOpenModal = async (type: number) => {
         setEquipType(type);
         setShowEquipModal(true);
@@ -156,8 +158,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
 
                                         <img src={AllAssets[item.imageAsset]} alt={item.name} />
                                         <p>{item.name}</p>
-                                        <button onClick={() => handleEquip(item.id)}>
+                                        <button  onClick={() => handleEquip(item.id)}>
                                             Choose
+                                        </button>
+                                        <button  onClick={() => setInspectEquipItem(item)}>
+                                            Details
                                         </button>
                                     </div>
                                 ))
@@ -166,9 +171,19 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
                     </div>
                 </div>
             )}
+            {inspectEquipItem && (
+                <ItemDetailsModal 
+                    item={inspectEquipItem}
+                    onClose={() => setInspectEquipItem(null)}
+                    onAction={() => {
+                        handleEquip(inspectEquipItem.id);
+                        setInspectEquipItem(null);
+                    }}
+                    actionText="Equip"
+                />
+            )}
         </div>
 
-        
     );
 
 }

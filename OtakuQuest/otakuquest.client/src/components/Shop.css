@@ -197,6 +197,7 @@
     font-weight: 900;
     cursor: pointer;
     transition: background 0.2s;
+    margin-bottom: 10px;
 }
 
 .buy-btn:hover:not(.disabled) {

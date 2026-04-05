@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OtakuQuest.Server.Models
 {
@@ -53,5 +54,64 @@ namespace OtakuQuest.Server.Models
         [Required]
         public ICollection<UserItem> Inventory { get; set; } = new List<UserItem>();
 
+
+
+        [NotMapped]
+        public int TotalSTR 
+        {
+            get 
+            {
+                int bonus = (EquippedWeapon?.StrBonus ?? 0) + 
+                    (EquippedAvatar?.StrBonus ?? 0) + 
+                    (EquippedBackground?.StrBonus ?? 0);
+                float mult = (EquippedWeapon?.StrMultiplier ?? 1f) * 
+                    (EquippedAvatar?.StrMultiplier ?? 1f) * 
+                    (EquippedBackground?.StrMultiplier ?? 1f);
+                return (int)((STR + bonus) * mult);
+            }
+        }
+
+        [NotMapped]
+        public int TotalINT
+        {
+            get
+            {
+                int bonus = (EquippedWeapon?.IntBonus ?? 0) +
+                    (EquippedAvatar?.IntBonus ?? 0) +
+                    (EquippedBackground?.IntBonus ?? 0);
+                float mult = (EquippedWeapon?.IntMultiplier ?? 1f) *
+                    (EquippedAvatar?.IntMultiplier ?? 1f) *
+                    (EquippedBackground?.IntMultiplier ?? 1f);
+                return (int)((INT + bonus) * mult);
+            }
+        }
+        [NotMapped]
+        public int TotalDEF
+        {
+            get
+            {
+                int bonus = (EquippedWeapon?.DefBonus ?? 0) + 
+                    (EquippedAvatar?.DefBonus ?? 0) + 
+                    (EquippedBackground?.DefBonus ?? 0);
+                float mult = (EquippedWeapon?.DefMultiplier ?? 1f) *
+                    (EquippedAvatar?.DefMultiplier ?? 1f) * 
+                    (EquippedBackground?.DefMultiplier ?? 1f);
+                return (int)((DEF + bonus) * mult);
+            }
+        }
+        [NotMapped]
+        public int TotalMaxHP
+        {
+            get
+            {
+                int bonus = (EquippedWeapon?.HpBonus ?? 0) + 
+                    (EquippedAvatar?.HpBonus ?? 0) + 
+                    (EquippedBackground?.HpBonus ?? 0);
+                float mult = (EquippedWeapon?.HpMultiplier ?? 1f)
+                    * (EquippedAvatar?.HpMultiplier ?? 1f) *
+                    (EquippedBackground?.HpMultiplier ?? 1f);
+                return (int)((MaxHP + bonus) * mult);
+            }
+        }
     }
 }
