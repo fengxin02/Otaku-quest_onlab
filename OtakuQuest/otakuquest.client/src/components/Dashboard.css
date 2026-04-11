@@ -1,6 +1,10 @@
 :root{
     --stat-bg-color: rgba(168, 50, 73, 0.4);
     --stat-text-color: #ffffff;
+    --dashboard-pink-primary: #c03b63;
+    --dashboard-pink-hover: #a83249;
+    --dashboard-pink-soft: #f6d7e2;
+    --dashboard-pink-soft-hover: #efbfd1;
 }
 
 
@@ -30,7 +34,7 @@
 
 .equip-item-card:hover {
     transform: translateY(-5px); 
-    border-color: #3b82f6;
+    border-color: var(--dashboard-pink-primary);
 }
 
 .equip-item-card img {
@@ -50,7 +54,7 @@
 
 .equip-item-card button {
     width: 100%;
-    background: #3b82f6;
+    background: var(--dashboard-pink-primary);
     color: white;
     border: none;
     padding: 10px;
@@ -63,16 +67,16 @@
 
 .equip-item-card button:last-child {
     margin-bottom: 0;
-    background: #e2e8f0; 
-    color: #334155;
+    background: var(--dashboard-pink-soft);
+    color: #6f1733;
 }
 
 .equip-item-card button:hover {
-    background: #2563eb;
+    background: var(--dashboard-pink-hover);
 }
 
 .equip-item-card button:last-child:hover {
-    background: #cbd5e1; 
+    background: var(--dashboard-pink-soft-hover);
 }
 
 
@@ -143,12 +147,13 @@
     max-height: 100px;
     object-fit: contain;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .equip-item-card button {
     margin-top: auto;
     width: 100%;
-    background: #3b82f6;
+    background: var(--dashboard-pink-primary);
     color: white;
     border: none;
     padding: 8px;
@@ -158,7 +163,7 @@
 }
 
 .equip-item-card button:hover {
-    background: #2563eb;
+    background: var(--dashboard-pink-hover);
 }
 
 
@@ -392,14 +397,11 @@
 .vital-box p:last-child span { 
     background: linear-gradient(90deg, #ff007f 0%, #7928ca 50%, #b0782b 100%);
     
-    /* 第 2 步：让背景只按照文字的轮廓显示 */
     -webkit-background-clip: text;
     background-clip: text;
     
-    /* 第 3 步：把文字本体变成透明的，露出后面的底色 */
     color: transparent;
     
-    /* 补充：字体稍微加粗一点，渐变效果会更明显！ */
     font-weight: 900;
 } 
 

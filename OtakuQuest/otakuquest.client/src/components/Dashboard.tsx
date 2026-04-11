@@ -156,7 +156,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
                                 myItems.map(item => (
                                     <div key={item.id} className="equip-item-card">
 
-                                        <img src={AllAssets[item.imageAsset]} alt={item.name} />
+                                        <img src={AllAssets[item.imageAsset]} alt={item.name} 
+                                        onClick={() => setInspectEquipItem(item)} />
                                         <p>{item.name}</p>
                                         <button  onClick={() => handleEquip(item.id)}>
                                             Choose

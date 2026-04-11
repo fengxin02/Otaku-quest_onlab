@@ -141,7 +141,8 @@ const Shop: React.FC<ShopProps> = ({ onBackToMenu, stats, refreshStats }) => {
                                     <div className="item-image-container">
                                         <img src={activeTab === 1 ? avatarImageSrc : 
                                             activeTab === 2 ? backgroundImageSrc : weaponImageSrc} 
-                                            alt={item.name} className="item-image" />
+                                            alt={item.name} className="item-image" 
+                                            onClick={() => setInspectItem(item)}/>
                                     </div>
                                     <p className="item-desc">{item.description}</p>
                                     
