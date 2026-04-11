@@ -11,6 +11,8 @@ import Heart from '../assets/heart.png';
 import Strengthicon from '../assets/strength.png';
 import Defenseicon from '../assets/DoranShield.png';
 import Intelligenceicon from '../assets/eldenring.png';
+import DiaSword from '../assets/Diamond_Sword.png';
+import Katana from '../assets/Katana.png';
 
 export const AvatarAssets: Record<string, string> = {
     'DefaultAvatar': DefaultImage,
@@ -26,7 +28,9 @@ export const BackgroundAssets: Record<string, string> = {
 };
 
 export const WeaponAssets: Record<string, string> = {
-    'DefaultWeapon': DefaultBackground,
+    'DiaSword': DiaSword,
+    'Katana': Katana,
+
 };
     
 export const AllAssets: Record<string, string> = {

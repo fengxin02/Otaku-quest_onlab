@@ -76,6 +76,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
                     <button className="equip-btn" onClick={() => handleOpenModal(2)}>
                         Background
                     </button>
+                    <button className="equip-btn" onClick={() => handleOpenModal(0)}>
+                        Weapon
+                    </button>
                 </div>
                 
                 <div className="dashboard-cards-row">
@@ -85,7 +88,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
                         {/* Left site Character Portrait */}
                         <div className="character-portrait-section">
                             <div className="portrait-placeholder">
-                                <img className="portrait-img" src={AvatarAssets[stats.avatarImage || 'DefaultAvatar']} alt="Character Portrait" />
+                                <img className="portrait-img" src={AvatarAssets[stats.avatarImage || 'DefaultAvatar']} 
+                                alt="Character Portrait"
+                                onClick={() => handleOpenModal(1)} />
                             </div>
                             <div className="character-name-badge">
                                 {stats.username} 
@@ -131,10 +136,24 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
                         <div className="equip-column">
                             <div className="equip-slot-box">
                                 <h4>Weapon</h4>
-                                <div className="weapon-placeholder">
-                                    <span className="empty-slot-icon">🗡️</span>
-                                    <p>No Weapon</p>
-                                    <small>(Still in progress...)</small>
+                                <div className="weapon-placeholder" onClick={() => handleOpenModal(0)}>
+                                    
+                                    {stats.weaponImage ? (
+                                        <>
+                                            <img 
+                                                src={AllAssets[stats.weaponImage] } 
+                                                className="equipped-weapon-img"
+                                            />
+                                            <p>{stats.weaponName}</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span className="empty-slot-icon">🗡️</span>
+                                            <p>No Weapon</p>
+                                            <small>(Click to equip)</small>
+                                        </>
+                                    )}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -146,7 +165,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
             {showEquipModal && (
                 <div className="equip-modal-overlay">
                     <div className="equip-modal">
-                        <h2>Select your {equipType === 1 ? 'Character' : 'Background'}</h2>
+                        <h2>Select your {equipType === 1 ? 'Character' : (equipType === 0 ? 'Weapon' : 'Background')}</h2>
                         <button className="close-modal-btn" onClick={() => setShowEquipModal(false)}>✖</button>
                         
                         <div className="equip-grid">

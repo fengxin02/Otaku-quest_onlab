@@ -82,26 +82,26 @@
 
 
 .equip-btn {
-    background: rgba(30, 41, 59, 0.85);
-    color: white;
-    border: 2px solid #334155;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--dashboard-pink-primary) 0%, #d14f7a 100%);
+    color: #ffffff;
+    border: 2px solid #e89bb0;
+    padding: 14px 32px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.05rem;
     cursor: pointer;
     backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
-    gap: 25px;
-    display: flex;
-    justify-content: center;
-    overflow-y: auto;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(192, 59, 99, 0.3);
 }
 
 .equip-btn:hover {
-   background: rgba(51, 65, 85, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, var(--dashboard-pink-hover) 0%, #c03b63 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(192, 59, 99, 0.5);
+    border-color: #f0a0c0;
 }
 
 .equip-modal-overlay {
@@ -166,6 +166,13 @@
     background: var(--dashboard-pink-hover);
 }
 
+.equipped-weapon-img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
 
 .dashboard-wrapper {
     min-height: 100vh;
@@ -188,9 +195,10 @@
 .dashboard-topbar{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 300px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .dashboard-cards-row {
@@ -203,22 +211,25 @@
 }
 
 .back-to-menu-btn {
-    background: rgba(30, 41, 59, 0.85);
-    color: white;
-    border: 2px solid #334155;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 1.1rem;
+    background: rgba(111, 23, 51, 0.6);
+    color: #ffffff;
+    border: 2px solid #d97fa0;
+    padding: 12px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
     backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .back-to-menu-btn:hover {
-    background: rgba(51, 65, 85, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background: rgba(168, 50, 73, 0.85);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(192, 59, 99, 0.4);
+    border-color: #f0a0c0;
 }
 .dashboard-card {
     background: rgba(255, 255, 255, 0.85);
@@ -257,6 +268,7 @@
     max-height: 100%;
     border-radius: 12px;
     object-fit: cover; /*fill the container*/
+    cursor: pointer;
 }
 
 /* ================= Right side (STATS) ================= */
