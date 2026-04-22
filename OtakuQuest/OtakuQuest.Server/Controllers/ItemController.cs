@@ -94,7 +94,8 @@ namespace OtakuQuest.Server.Controllers
             }
             var itemToEquip = userItem.Item;
 
-            bool wasFullHp = player.CurrentHP >= player.TotalMaxHP;
+            //bool wasFullHp = player.CurrentHP >= player.TotalMaxHP;
+            double hpPercentBefore = (double)player.CurrentHP / player.TotalMaxHP;
             switch (itemToEquip.Type)
             {
                 case ItemType.Weapon:
@@ -113,14 +114,15 @@ namespace OtakuQuest.Server.Controllers
                     return BadRequest("Invalid item type!");
             }
 
-            if (wasFullHp)
-            {
-                player.CurrentHP = player.TotalMaxHP;
-            }
-            else if (player.CurrentHP > player.TotalMaxHP)
-            {
-                player.CurrentHP = player.TotalMaxHP;
-            }
+            //if (wasFullHp)
+            //{
+            //    player.CurrentHP = player.TotalMaxHP;
+            //}
+            //else if (player.CurrentHP > player.TotalMaxHP)
+            //{
+            //    player.CurrentHP = player.TotalMaxHP;
+            //}
+            player.CurrentHP = (int)(player.TotalMaxHP * hpPercentBefore);
             await _context.SaveChangesAsync();
             return Ok(new { Message = $"Successfully equipped {itemToEquip.Name}!" });
 
