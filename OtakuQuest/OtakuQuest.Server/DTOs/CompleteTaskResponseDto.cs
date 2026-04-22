@@ -20,7 +20,6 @@ namespace OtakuQuest.Server.DTOs
         public int NewLevel { get; set; }
         [Required]
         public int CurrentXP { get; set; }
-        [Required]
-        public int XpToNextLevel { get; set; }
+    
     }
 }

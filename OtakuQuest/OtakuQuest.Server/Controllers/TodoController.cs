@@ -143,36 +143,18 @@ namespace OtakuQuest.Server.Controllers
                     break;
             }
 
-            player.XP += xp;
+            player.AddXp(xp);
             player.Currency += currency;
             player.STR += strength;
             player.INT += intteligence;
             player.DEF += defence;
 
-            //levelup
-
-            int xpForNextLevel = player.Level * 100; // Example: 100 XP per level
-
-            bool leveledUp = false;
-
-            if(player.XP > xpForNextLevel)
-            {
-                player.Level++;
-                player.XP -= xpForNextLevel;
-                player.MaxHP += 20;
-                player.CurrentHP = player.MaxHP;
-                player.Currency += 100; // Bonus currency for leveling up
-                player.STR += 2; // Bonus strength for leveling up
-                player.INT += 2; // Bonus intelligence for leveling up
-                player.DEF += 2; // Bonus defense for leveling up
-
-                leveledUp = true;
-            }
+         
 
             _context.SaveChanges();
             var responseDto = new CompleteTaskResponseDto
             {
-                Message = leveledUp ? "Challenge completed! Level UP!" : "Challenge completed successfully!",
+                Message ="Challenge completed successfully!",
                 XPReward = xp,
                 CurrencyReward = currency,
                 StrengthReward = strength,
@@ -180,7 +162,6 @@ namespace OtakuQuest.Server.Controllers
                 DefenceReward = defence,
                 NewLevel = player.Level,
                 CurrentXP = player.XP,
-                XpToNextLevel = xpForNextLevel - player.XP
             };
 
             return Ok(responseDto);

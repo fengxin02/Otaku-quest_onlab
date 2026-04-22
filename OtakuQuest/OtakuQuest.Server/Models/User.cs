@@ -28,14 +28,12 @@ namespace OtakuQuest.Server.Models
         [Required]
         public int INT { get; set; } = 1;
         [Required]
-        public int DEF { get; set; } = 1; 
+        public int DEF { get; set; } = 1;
 
         // Foreign keys for the items
-        public int? AvatarItemId { get; set; } 
+        public int? AvatarItemId { get; set; }
         public int? BackgroundItemId { get; set; }
 
-        // Navigációs tulajdonság: Egy felhasználónak több feladata lehet (N:1 kapcsolat)
-        //1 User - N Tasks
         [Required]
         public ICollection<TodoTask> Tasks { get; set; } = new List<TodoTask>();
 
@@ -60,18 +58,18 @@ namespace OtakuQuest.Server.Models
 
         public int CurrentBossHp { get; set; }
         [Required]
-        public int LastDefeatedBossOrder { get; set; } = 0;
+        public int LastDefeatedBossOrder { get; set; } = -1;
 
         [NotMapped]
-        public int TotalSTR 
+        public int TotalSTR
         {
-            get 
+            get
             {
-                int bonus = (EquippedWeapon?.StrBonus ?? 0) + 
-                    (EquippedAvatar?.StrBonus ?? 0) + 
+                int bonus = (EquippedWeapon?.StrBonus ?? 0) +
+                    (EquippedAvatar?.StrBonus ?? 0) +
                     (EquippedBackground?.StrBonus ?? 0);
-                float mult = (EquippedWeapon?.StrMultiplier ?? 1f) * 
-                    (EquippedAvatar?.StrMultiplier ?? 1f) * 
+                float mult = (EquippedWeapon?.StrMultiplier ?? 1f) *
+                    (EquippedAvatar?.StrMultiplier ?? 1f) *
                     (EquippedBackground?.StrMultiplier ?? 1f);
                 return (int)((STR + bonus) * mult);
             }
@@ -96,11 +94,11 @@ namespace OtakuQuest.Server.Models
         {
             get
             {
-                int bonus = (EquippedWeapon?.DefBonus ?? 0) + 
-                    (EquippedAvatar?.DefBonus ?? 0) + 
+                int bonus = (EquippedWeapon?.DefBonus ?? 0) +
+                    (EquippedAvatar?.DefBonus ?? 0) +
                     (EquippedBackground?.DefBonus ?? 0);
                 float mult = (EquippedWeapon?.DefMultiplier ?? 1f) *
-                    (EquippedAvatar?.DefMultiplier ?? 1f) * 
+                    (EquippedAvatar?.DefMultiplier ?? 1f) *
                     (EquippedBackground?.DefMultiplier ?? 1f);
                 return (int)((DEF + bonus) * mult);
             }
@@ -110,13 +108,36 @@ namespace OtakuQuest.Server.Models
         {
             get
             {
-                int bonus = (EquippedWeapon?.HpBonus ?? 0) + 
-                    (EquippedAvatar?.HpBonus ?? 0) + 
+                int bonus = (EquippedWeapon?.HpBonus ?? 0) +
+                    (EquippedAvatar?.HpBonus ?? 0) +
                     (EquippedBackground?.HpBonus ?? 0);
                 float mult = (EquippedWeapon?.HpMultiplier ?? 1f)
                     * (EquippedAvatar?.HpMultiplier ?? 1f) *
                     (EquippedBackground?.HpMultiplier ?? 1f);
                 return (int)((MaxHP + bonus) * mult);
+            }
+        }
+
+        public void AddXp(int xpAmount)
+        {
+            XP += xpAmount;
+
+          
+            int xpNeeded =  Level * 100;
+
+            while (XP >= xpNeeded)
+            {
+                XP -= xpNeeded; 
+                Level++;
+
+                MaxHP += 20;
+                STR += 2;
+                INT += 2;
+                DEF += 1;
+                Currency += 100;
+                CurrentHP = TotalMaxHP;
+
+                xpNeeded = Level * 100;
             }
         }
     }

@@ -643,8 +643,7 @@
           "message",
           "newLevel",
           "strengthReward",
-          "xpReward",
-          "xpToNextLevel"
+          "xpReward"
         ],
         "type": "object",
         "properties": {
@@ -677,10 +676,6 @@
             "format": "int32"
           },
           "currentXP": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "xpToNextLevel": {
             "type": "integer",
             "format": "int32"
           }

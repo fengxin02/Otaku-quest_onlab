@@ -72,7 +72,7 @@ namespace OtakuQuest.Server.Controllers
                     {
                         return NotFound("No Boss in this game!");
                     }
-                    player.LastDefeatedBossOrder = 0; // Reset to the first boss order
+                    player.LastDefeatedBossOrder = -1; // Reset to the first boss order
                 }
 
                 player.CurrentBossId = nextBoss.Id;
@@ -130,7 +130,7 @@ namespace OtakuQuest.Server.Controllers
                 result.Message = $"Boss: {boss.Name} defeted! Gained {boss.RewardXP} XP and {boss.RewardCurrency} PrimoGems!";
 
                 //Reward the player
-                player.XP += boss.RewardXP;
+                player.AddXp(boss.RewardXP);
                 player.Currency += boss.RewardCurrency;
 
                 if (boss.RewardItemId.HasValue)

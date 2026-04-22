@@ -11,6 +11,5 @@ export type CompleteTaskResponseDto = {
     defenceReward: number;
     newLevel: number;
     currentXP: number;
-    xpToNextLevel: number;
 };
 
