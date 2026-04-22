@@ -16,6 +16,8 @@ namespace OtakuQuest.Server.DTOs
 
         [Required]
         public int Price { get; set; }
+        [Required]
+        public bool IsPurchasable { get; set; } = true;
 
         [Required]
         public string ImageAsset { get; set; } = string.Empty;

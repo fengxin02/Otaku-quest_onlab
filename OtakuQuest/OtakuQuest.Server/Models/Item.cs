@@ -15,6 +15,8 @@ namespace OtakuQuest.Server.Models
         [Required]
         public int Price { get; set; }
 
+        public bool IsPurchasable { get; set; } = true;
+
         public int HpBonus { get; set; }
         public int StrBonus { get; set; }
         public int IntBonus { get; set; }

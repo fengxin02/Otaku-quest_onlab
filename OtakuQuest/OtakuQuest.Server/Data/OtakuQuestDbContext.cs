@@ -14,7 +14,7 @@ namespace OtakuQuest.Server.Data
     
         public DbSet<UserItem> UserItems { get; set; } = null!;
         public DbSet<Item> Items { get; set; } = null!;
-
+        public DbSet<Boss> Bosses { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

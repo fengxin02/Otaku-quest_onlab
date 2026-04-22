@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OtakuQuest.Server.Data;
@@ -10,6 +11,7 @@ namespace OtakuQuest.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ItemController : ControllerBase
     {
         private readonly OtakuQuestDbContext _context;
@@ -21,7 +23,8 @@ namespace OtakuQuest.Server.Controllers
         [HttpGet("shop")]
         public async Task<ActionResult<List<Item>>> GetShopItems()
         {
-            var items = await _context.Items.ToListAsync();
+            var items = await _context.Items
+                .Where(i => i.IsPurchasable == true).ToListAsync();
             return Ok(items);
         }
 
@@ -147,10 +150,8 @@ namespace OtakuQuest.Server.Controllers
             return Ok(myItems);
         }
         [HttpPost("create")]
-        // Opcionális: Ha az egész controlleren ott van fent az [Authorize], 
-        // de te ezt könnyen akarod tesztelni token nélkül is Swaggerből, 
-        // akkor vedd ki a kommentből az alábbi sort:
-        // [AllowAnonymous] 
+       
+        [AllowAnonymous] 
         public async Task<IActionResult> CreateItem([FromBody] CreateItemDto dto)
         {
             var newItem = new Item
@@ -167,7 +168,8 @@ namespace OtakuQuest.Server.Controllers
                 HpMultiplier = dto.HpMultiplier,
                 StrMultiplier = dto.StrMultiplier,
                 IntMultiplier = dto.IntMultiplier,
-                DefMultiplier = dto.DefMultiplier
+                DefMultiplier = dto.DefMultiplier,
+                IsPurchasable = dto.IsPurchasable 
             };
 
             _context.Items.Add(newItem);
@@ -175,10 +177,11 @@ namespace OtakuQuest.Server.Controllers
 
             return Ok(new
             {
-                Message = $"Sikeresen létrehoztad a tárgyat: {newItem.Name}",
+                Message = $"Successfully Added new item: {newItem.Name}",
                 Item = newItem
             });
         }
+
     }
 }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OtakuQuest.Server.Data;
 
@@ -11,9 +12,11 @@ using OtakuQuest.Server.Data;
 namespace OtakuQuest.Server.Migrations
 {
     [DbContext(typeof(OtakuQuestDbContext))]
-    partial class OtakuQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260422153813_AddBossandController")]
+    partial class AddBossandController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +53,6 @@ namespace OtakuQuest.Server.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
 
                     b.Property<int>("RewardCurrency")
                         .HasColumnType("int");
@@ -106,9 +106,6 @@ namespace OtakuQuest.Server.Migrations
 
                     b.Property<float>("IntMultiplier")
                         .HasColumnType("real");
-
-                    b.Property<bool>("IsPurchasable")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -208,9 +205,6 @@ namespace OtakuQuest.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("INT")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LastDefeatedBossOrder")
                         .HasColumnType("int");
 
                     b.Property<int>("Level")

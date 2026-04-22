@@ -54,7 +54,13 @@ namespace OtakuQuest.Server.Models
         [Required]
         public ICollection<UserItem> Inventory { get; set; } = new List<UserItem>();
 
+        //Boss 
+        public int? CurrentBossId { get; set; }
+        public Boss? CurrentBoss { get; set; }
 
+        public int CurrentBossHp { get; set; }
+        [Required]
+        public int LastDefeatedBossOrder { get; set; } = 0;
 
         [NotMapped]
         public int TotalSTR 
