@@ -8,6 +8,7 @@ export type CreateItemDto = {
     description: string;
     type: ItemType;
     price: number;
+    isPurchasable: boolean;
     imageAsset: string;
     hpBonus?: number;
     strBonus?: number;

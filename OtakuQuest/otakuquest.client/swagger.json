@@ -101,6 +101,78 @@
         }
       }
     },
+    "/api/Boss/create": {
+      "post": {
+        "tags": [
+          "Boss"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBossDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBossDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBossDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Boss/current": {
+      "get": {
+        "tags": [
+          "Boss"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Boss/attack": {
+      "post": {
+        "tags": [
+          "Boss"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CombatResultDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CombatResultDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CombatResultDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Item/shop": {
       "get": {
         "tags": [
@@ -422,45 +494,6 @@
           }
         }
       }
-    },
-    "/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "GetWeatherForecast",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -483,6 +516,77 @@
         },
         "additionalProperties": false
       },
+      "Boss": {
+        "required": [
+          "def",
+          "description",
+          "id",
+          "imageAsset",
+          "int",
+          "maxHp",
+          "name",
+          "order",
+          "rewardCurrency",
+          "rewardXP",
+          "str"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "imageAsset": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxHp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "str": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "int": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "def": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardXP": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardCurrency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rewardItem": {
+            "$ref": "#/components/schemas/Item"
+          }
+        },
+        "additionalProperties": false
+      },
       "BuyItemDto": {
         "required": [
           "itemId"
@@ -492,6 +596,40 @@
           "itemId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CombatResultDto": {
+        "required": [
+          "bossDamageDealt",
+          "bossDefeated",
+          "playerDamageDealt",
+          "playerDefeated"
+        ],
+        "type": "object",
+        "properties": {
+          "playerDamageDealt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bossDamageDealt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bossDefeated": {
+            "type": "boolean"
+          },
+          "playerDefeated": {
+            "type": "boolean"
+          },
+          "rewardItemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -549,10 +687,74 @@
         },
         "additionalProperties": false
       },
+      "CreateBossDto": {
+        "required": [
+          "def",
+          "description",
+          "imageAsset",
+          "int",
+          "maxHp",
+          "name",
+          "order",
+          "rewardCurrency",
+          "rewardXP",
+          "str"
+        ],
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "imageAsset": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxHp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "str": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "int": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "def": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardXP": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardCurrency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rewardItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateItemDto": {
         "required": [
           "description",
           "imageAsset",
+          "isPurchasable",
           "name",
           "price",
           "type"
@@ -573,6 +775,9 @@
           "price": {
             "type": "integer",
             "format": "int32"
+          },
+          "isPurchasable": {
+            "type": "boolean"
           },
           "imageAsset": {
             "minLength": 1,
@@ -692,6 +897,9 @@
           "price": {
             "type": "integer",
             "format": "int32"
+          },
+          "isPurchasable": {
+            "type": "boolean"
           },
           "hpBonus": {
             "type": "integer",
@@ -923,6 +1131,7 @@
           "id",
           "int",
           "inventory",
+          "lastDefeatedBossOrder",
           "level",
           "maxHP",
           "passwordHash",
@@ -1022,6 +1231,42 @@
             "items": {
               "$ref": "#/components/schemas/UserItem"
             }
+          },
+          "currentBossId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "currentBoss": {
+            "$ref": "#/components/schemas/Boss"
+          },
+          "currentBossHp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastDefeatedBossOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalSTR": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "totalINT": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "totalDEF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "totalMaxHP": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -1057,29 +1302,6 @@
           "acquiredAt": {
             "type": "string",
             "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WeatherForecast": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "temperatureC": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "summary": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false

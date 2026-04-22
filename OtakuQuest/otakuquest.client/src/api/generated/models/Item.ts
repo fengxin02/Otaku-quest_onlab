@@ -9,14 +9,15 @@ export type Item = {
     description: string;
     type: ItemType;
     price: number;
-    hpBonus: number;
-    strBonus: number;
-    intBonus: number;
-    defBonus: number;
-    hpMultiplier: number;
-    strMultiplier: number;
-    intMultiplier: number;
-    defMultiplier: number;
+    isPurchasable?: boolean;
+    hpBonus?: number;
+    strBonus?: number;
+    intBonus?: number;
+    defBonus?: number;
+    hpMultiplier?: number;
+    strMultiplier?: number;
+    intMultiplier?: number;
+    defMultiplier?: number;
     imageAsset: string;
 };
 

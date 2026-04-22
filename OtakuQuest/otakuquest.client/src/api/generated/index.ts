@@ -8,8 +8,11 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AuthResponseDto } from './models/AuthResponseDto';
+export type { Boss } from './models/Boss';
 export type { BuyItemDto } from './models/BuyItemDto';
+export type { CombatResultDto } from './models/CombatResultDto';
 export type { CompleteTaskResponseDto } from './models/CompleteTaskResponseDto';
+export type { CreateBossDto } from './models/CreateBossDto';
 export type { CreateItemDto } from './models/CreateItemDto';
 export type { CreateTaskDto } from './models/CreateTaskDto';
 export type { DifficultyRank } from './models/DifficultyRank';
@@ -24,10 +27,9 @@ export type { TaskType } from './models/TaskType';
 export type { TodoTask } from './models/TodoTask';
 export type { User } from './models/User';
 export type { UserItem } from './models/UserItem';
-export type { WeatherForecast } from './models/WeatherForecast';
 
 export { AuthService } from './services/AuthService';
+export { BossService } from './services/BossService';
 export { ItemService } from './services/ItemService';
 export { PlayerProfileService } from './services/PlayerProfileService';
 export { TodoService } from './services/TodoService';
-export { WeatherForecastService } from './services/WeatherForecastService';
