@@ -10,14 +10,14 @@ export type Item = {
     type: ItemType;
     price: number;
     isPurchasable?: boolean;
-    hpBonus?: number;
-    strBonus?: number;
-    intBonus?: number;
-    defBonus?: number;
-    hpMultiplier?: number;
-    strMultiplier?: number;
-    intMultiplier?: number;
-    defMultiplier?: number;
+    hpBonus: number;
+    strBonus: number;
+    intBonus: number;
+    defBonus: number;
+    hpMultiplier: number;
+    strMultiplier: number;
+    intMultiplier: number;
+    defMultiplier: number;
     imageAsset: string;
 };
 

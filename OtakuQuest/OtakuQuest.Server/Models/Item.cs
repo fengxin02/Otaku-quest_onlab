@@ -17,14 +17,21 @@ namespace OtakuQuest.Server.Models
 
         public bool IsPurchasable { get; set; } = true;
 
+        [Required]
         public int HpBonus { get; set; }
+        [Required]
         public int StrBonus { get; set; }
+        [Required]
         public int IntBonus { get; set; }
+        [Required]
         public int DefBonus { get; set; }
-
+        [Required]
         public float HpMultiplier { get; set; } = 1.0f;
+        [Required]
         public float StrMultiplier { get; set; } = 1.0f;
+        [Required]
         public float IntMultiplier { get; set; } = 1.0f;
+        [Required]
         public float DefMultiplier { get; set; } = 1.0f;
 
 
