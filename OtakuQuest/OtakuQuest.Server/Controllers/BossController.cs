@@ -127,7 +127,7 @@ namespace OtakuQuest.Server.Controllers
             {
                 result.BossDefeated = true;
                 result.BossDamageDealt = 0;
-                result.Message = $"Boss: {boss.Name} defeted! Gained {boss.RewardXP} XP and {boss.RewardCurrency} PrimoGems!";
+                result.Message = $"{boss.Name} defeted! Gained {boss.RewardXP} XP and {boss.RewardCurrency} PrimoGems!";
 
                 //Reward the player
                 player.AddXp(boss.RewardXP);
@@ -142,7 +142,7 @@ namespace OtakuQuest.Server.Controllers
                     {
                         _context.UserItems.Add(new UserItem { UserId = player.Id, ItemId = boss.RewardItemId.Value });
                         result.RewardItemName = boss.RewardItem?.Name;
-                        result.Message += $" New Item: {result.RewardItemName}!";
+                        result.Message += $" Congratulation you got a new Item: {result.RewardItemName}!";
                     }
                 }
                 player.LastDefeatedBossOrder = boss.Order;

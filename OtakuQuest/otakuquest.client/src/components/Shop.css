@@ -181,7 +181,7 @@
     flex-grow: 1; /* Fills the remaining space */
 }
 
-/* --- Gombok alul --- */
+/* --- Bottom Buttons --- */
 .item-footer {
     width: 100%;
     margin-top: 15px;
@@ -231,3 +231,159 @@
 }
 .shop-message.success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
 .shop-message.error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+
+@media (max-width: 768px) {
+    .shop-wrapper {
+        padding: 8px;
+        align-items: flex-start;
+    }
+
+    .shop-container {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .shop-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 1rem;
+        border-radius: 9px;
+    }
+
+    .shop-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .shop-currency {
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-size: 1.05rem;
+    }
+
+    .gem-icon {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+    }
+
+    .shop-tabs {
+        margin-bottom: 18px;
+    }
+
+    .tab-btn {
+        min-width: 0;
+        border-right-width: 2px;
+        padding: 10px 6px;
+        font-size: 0.92rem;
+        letter-spacing: 0.2px;
+    }
+
+    .shop-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .shop-card {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        grid-template-areas:
+            "image name"
+            "image desc"
+            "image actions";
+        align-items: start;
+        column-gap: 12px;
+        row-gap: 8px;
+        padding: 14px;
+    }
+
+    .shop-card.owned {
+        opacity: 0.9;
+    }
+
+    .item-image-container {
+        grid-area: image;
+        height: 150px;
+        margin: 0;
+    }
+
+    .item-name {
+        grid-area: name;
+        margin: 0;
+        font-size: 1.35rem;
+        text-align: left;
+        line-height: 1.1;
+    }
+
+    .item-desc {
+        grid-area: desc;
+        margin: 0;
+        text-align: left;
+        font-size: 0.9rem;
+        line-height: 1.35;
+        line-clamp: 3;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .item-footer {
+        grid-area: actions;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .buy-btn {
+        margin-bottom: 0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .shop-title {
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+    }
+
+    .shop-currency {
+        font-size: 0.95rem;
+        padding: 6px 8px;
+    }
+
+    .tab-btn {
+        font-size: 0.8rem;
+        padding: 9px 4px;
+    }
+
+    .shop-card {
+        grid-template-columns: 100px 1fr;
+        padding: 12px;
+    }
+
+    .item-image-container {
+        height: 125px;
+    }
+
+    .item-name {
+        font-size: 1.1rem;
+    }
+
+    .buy-btn {
+        font-size: 0.92rem;
+        padding: 9px 10px;
+    }
+}

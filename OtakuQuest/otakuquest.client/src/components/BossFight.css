@@ -216,20 +216,21 @@
 
 @keyframes playerAttack {
     0% { transform: translateX(0); }
-    50% { transform: translateX(50px) scale(1.05); }
+    50% { transform: translateX(50px) scale(1.05); } /*goes forward, and bigger*/
     100% { transform: translateX(0); }
 }
 
 @keyframes takeDamage {
     0% { transform: translateX(0); filter: brightness(1); }
     25% { transform: translateX(-10px); filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(5); }
+    /* go back 10, sepia makes it yellow, hue-rotate-> changes the yellow to red, saturates makes color deeper */
     50% { transform: translateX(10px); filter: brightness(1); }
     75% { transform: translateX(-10px); }
     100% { transform: translateX(0); }
 }
 
 .attack-anim-player { animation: playerAttack 0.3s ease-in-out; }
-.take-damage-anim { animation: takeDamage 0.4s ease-in-out 0.1s; }
+.take-damage-anim { animation: takeDamage 0.4s ease-in-out 0.1s; } /* wait 0.1s*/
 
 @media (max-width: 900px) {
     .arena-container { flex-direction: column; gap: 30px; }
