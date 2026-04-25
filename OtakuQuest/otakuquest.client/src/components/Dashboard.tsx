@@ -48,6 +48,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout, onBackToMenu, stats , r
     if(!stats) {
         return null;
     }
+
     const xpNeededForNextLevel = (stats.level) * 100; 
     const currentXp = stats.xp;
     const xpPercentage = Math.min((currentXp / xpNeededForNextLevel) * 100, 100);

@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CombatResultDto } from '../models/CombatResultDto';
 import type { CreateBossDto } from '../models/CreateBossDto';
+import type { CurrentBossResponseDto } from '../models/CurrentBossResponseDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -24,10 +25,10 @@ export class BossService {
         });
     }
     /**
-     * @returns any OK
+     * @returns CurrentBossResponseDto OK
      * @throws ApiError
      */
-    public static getApiBossCurrent(): CancelablePromise<any> {
+    public static getApiBossCurrent(): CancelablePromise<CurrentBossResponseDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/Boss/current',

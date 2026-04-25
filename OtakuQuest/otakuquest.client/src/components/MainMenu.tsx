@@ -64,6 +64,12 @@ const MainMenu: React.FC<MainMenuProps> = ({ onNavigate,  stats, loading, refres
             </div>
 
             {/* --- Bottom: The Big TODO List Card --- */}
+            <div className="mainmenu-boss-entry">
+                <button className="boss-fight-btn" onClick={() => onNavigate('boss')}>
+                    Boss Fight
+                </button>
+            </div>
+
             <div className="mainmenu-todo-section">
                 <div className="todo-header">
                     <h3>{showCompletedQuests ? 'Completed' : 'Active'} Quests</h3>

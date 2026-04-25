@@ -15,6 +15,7 @@ export type { CompleteTaskResponseDto } from './models/CompleteTaskResponseDto';
 export type { CreateBossDto } from './models/CreateBossDto';
 export type { CreateItemDto } from './models/CreateItemDto';
 export type { CreateTaskDto } from './models/CreateTaskDto';
+export type { CurrentBossResponseDto } from './models/CurrentBossResponseDto';
 export type { DifficultyRank } from './models/DifficultyRank';
 export type { EquipItemDto } from './models/EquipItemDto';
 export type { Item } from './models/Item';

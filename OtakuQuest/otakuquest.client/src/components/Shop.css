@@ -29,7 +29,7 @@
     flex-direction: column;
 }
 
-/* --- Fejléc --- */
+/* --- Header --- */
 .shop-header {
     display: flex;
     justify-content: space-between;
@@ -84,7 +84,7 @@
     margin-right: 10px;
 }
 
-/* --- Rajzolt TABS (Fülek) --- */
+/* --- Tabs --- */
 .shop-tabs {
     display: flex;
     width: 100%;
@@ -123,7 +123,7 @@
     background: #fff5f5;
 }
 
-/* --- Kártyák és Grid --- */
+/* --- Cards and Grid --- */
 .shop-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -178,7 +178,7 @@
     color: #64748b;
     text-align: center;
     font-size: 0.95rem;
-    flex-grow: 1; /* Kitölti a maradék helyet */
+    flex-grow: 1; /* Fills the remaining space */
 }
 
 /* --- Gombok alul --- */
@@ -189,7 +189,7 @@
 
 .buy-btn {
     width: 100%;
-    background: #ef4444; /* Piros ár a rajzod alapján */
+    background: #ef4444; /* Red price style based on the design */
     color: white;
     border: none;
     padding: 15px;
@@ -211,7 +211,7 @@
 }
 
 .owned-btn {
-    background: #10b981; /* Zöld, ha már megvan */
+    background: #10b981; /* Green when already owned */
     cursor: default;
 }
 

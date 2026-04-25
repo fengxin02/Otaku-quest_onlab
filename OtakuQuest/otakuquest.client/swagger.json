@@ -139,7 +139,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentBossResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentBossResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentBossResponseDto"
+                }
+              }
+            }
           }
         }
       }
@@ -838,6 +855,19 @@
         },
         "additionalProperties": false
       },
+      "CurrentBossResponseDto": {
+        "type": "object",
+        "properties": {
+          "boss": {
+            "$ref": "#/components/schemas/Boss"
+          },
+          "currentHp": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "DifficultyRank": {
         "enum": [
           0,
@@ -865,11 +895,19 @@
       },
       "Item": {
         "required": [
+          "defBonus",
+          "defMultiplier",
           "description",
+          "hpBonus",
+          "hpMultiplier",
           "id",
           "imageAsset",
+          "intBonus",
+          "intMultiplier",
           "name",
           "price",
+          "strBonus",
+          "strMultiplier",
           "type"
         ],
         "type": "object",

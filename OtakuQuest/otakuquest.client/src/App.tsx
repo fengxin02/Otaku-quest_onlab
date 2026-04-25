@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import MainMenu from './components/MainMenu';
 import { PlayerProfileService, type PlayerStatsDto } from './api/generated';
 import Shop from './components/Shop';
+import BossFight from './components/BossFight';
 
 function App() {
     const [playerStats, setPlayerStats] = useState<PlayerStatsDto | null>(null);
@@ -79,6 +80,12 @@ function App() {
                           onBackToMenu={() => setCurrentScreen('mainmenu')} 
                           stats={playerStats}
                           refreshStats={() => fetchStats(true)}
+                       />;
+
+            case 'boss':
+                return <BossFight
+                          onBack={() => setCurrentScreen('mainmenu')}
+                          pstats={playerStats}
                        />;
             
             default:

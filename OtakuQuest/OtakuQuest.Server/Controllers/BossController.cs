@@ -45,7 +45,7 @@ namespace OtakuQuest.Server.Controllers
         }
 
         [HttpGet("current")]
-        public async Task<IActionResult> GetCurrentBoss()
+        public async Task<ActionResult<CurrentBossResponseDto>> GetCurrentBoss()
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var player = await _context.Users
@@ -80,10 +80,10 @@ namespace OtakuQuest.Server.Controllers
                 player.CurrentBoss = nextBoss;
                 await _context.SaveChangesAsync();
 
-                return Ok(new { Boss = nextBoss, CurrentHp = player.CurrentBossHp });
+                return Ok(new CurrentBossResponseDto{ Boss = nextBoss, CurrentHp = player.CurrentBossHp });
             }
 
-            return Ok(new { Boss = player.CurrentBoss, CurrentHp = player.CurrentBossHp });
+            return Ok(new CurrentBossResponseDto{ Boss = player.CurrentBoss, CurrentHp = player.CurrentBossHp });
         }
 
 
